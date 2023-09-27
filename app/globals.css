@@ -1,27 +1,119 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+table {
+  margin: 2% 0%;
+}
+
+table, thead, tbody, th, td, tr {
+  border: 1px solid black;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.h2 {
+  margin: 1% 0%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  margin: 1%;
+  padding: 1%;
+  border-bottom: 3px solid black;
+}
+
+.main {
+  margin: 1%;
+  padding: 1%;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: left;
+  margin: 1% 0%;
+  padding: 1% 0%;
+}
+
+.loader {
+  margin: 1% 0%;
+}
+
+.table-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+}
+
+button, .button-insert, .button-update {
+  cursor: pointer;
+}
+
+/* The popup form covering 100% on top of screen centre - hidden by default state */
+.form-popout {
+  background-color: white;
+  /* display: none; */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  border: 3px solid #f1f1f1;
+  z-index: 1;
+}
+
+.form-container {
+  margin: 5%;
+}
+
+.label {
+  font-weight: 500;
+}
+
+.input {
+  width: 100%;
+  margin: 1% 0% 2% 0%;
+  padding: 1%;
+  border: none;
+  background: #f1f1f1;
+}
+
+.input:focus {
+  background-color: #ddd;
+  /* outline: none; */
+}
+
+.button-submit {
+  width: 10%;
+  margin: 2% 0%;
+  padding: 1%;
+  background-color: green;
+  color: white;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.button-cancel {
+  width: 10%;
+  margin: 2% 0%;
+  padding: 1%;
+  background-color: red;
+  color: white;
+  opacity: 0.8;
+}
+
+.button-submit:hover, .button-cancel:hover {
+  font-weight: bold;
+  opacity: 1;
 }
