@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model Member {
+  member_id String @db.Uuid @id
+  member_name String @db.VarChar(50)
+  member_password String @db.Uuid
+  member_bonus_points Float @db.DoublePrecision
+  member_created_date DateTime @db.Timestamp()
+  member_updated_date DateTime @db.Timestamp()
+
+  orders Order[]
+
+  @@map(name: "member")
+}
+
+model MemberLevel {
+  member_level_id String @db.Uuid @id
+  member_level_name String @db.VarChar(50)
+  bonus_points_min Float @db.DoublePrecision
+  bonus_points_max Float @db.DoublePrecision
+  member_level_created_date DateTime @db.Timestamp()
+  member_level_updated_date DateTime @db.Timestamp()
+
+  @@map(name: "member_level")
+}
+
+model Uom {
+  uom_id String @db.Uuid @id
+  uom_name String @db.VarChar(50)
+  uom_created_date DateTime @db.Timestamp()
+  uom_updated_date DateTime @db.Timestamp()
+
+  products Product[]
+
+  @@map(name: "uom")
+}
+
+model Product {
+  product_id String @db.Uuid @id
+  product_name String @db.VarChar(50)
+  uom_id String @db.Uuid
+  product_unit_price Float @db.DoublePrecision
+  product_bonus_points Float @db.DoublePrecision
+  product_created_date DateTime @db.Timestamp()
+  product_updated_date DateTime @db.Timestamp()
+
+  fk_uom_id Uom @relation(fields: [uom_id], references: [uom_id], onDelete: Restrict, onUpdate: Restrict)
+  orderItem OrderItem[]
+
+  @@map(name: "product")
+}
+
+model Order {
+  order_id String @db.Uuid @id
+  member_id String @db.Uuid
+  order_created_date DateTime @db.Timestamp()
+  order_updated_date DateTime @db.Timestamp()  
+
+  fk_member_id Member @relation(fields: [member_id], references: [member_id], onDelete: Restrict, onUpdate: Restrict)
+  orderItem OrderItem[]
+  
+  
+  @@map(name: "order")
+}
+
+model OrderItem {
+  order_item_id String @db.Uuid @id
+  order_id String @db.Uuid
+  product_id String @db.Uuid
+  order_item_quantity Float @db.DoublePrecision
+  order_item_created_date DateTime @db.Timestamp()
+  order_item_updated_date DateTime @db.Timestamp()
+
+  fk_order_id Order @relation(fields: [order_id], references: [order_id], onDelete: Restrict, onUpdate: Restrict)
+  fk_product_id Product @relation(fields: [product_id], references: [product_id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@map(name: "order_item")
+}
