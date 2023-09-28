@@ -1,10 +1,11 @@
 import React from 'react';
+import ButtonClick from './button-click';
 
-function SearchBar( {inputType, inputPlaceholder, inputValue, onSearchChange, buttonTitle} ) {
+function SearchBar( {searchPlaceholderText, searchTextValue, onSearchChange, buttonSearchTitle, onSearchClick} ) {
     return (
-      <div className="search-bar">
-        <input type={inputType} placeholder={inputPlaceholder} value={inputValue} onChange={onSearchChange} />
-        <button>{buttonTitle}</button>
+      <div className="flex-container">
+        <input type="text" placeholder={searchPlaceholderText} value={searchTextValue} onChange={onSearchChange} />
+        <ButtonClick buttonTitle={buttonSearchTitle} onButtonClick={onSearchClick}/>
       </div>
     );
   }

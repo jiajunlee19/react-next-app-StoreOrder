@@ -13,9 +13,14 @@ function HeaderMid() {
     setInputValue(e.target.value);
   };
 
+  function handleSearchClick(e) {
+    // Search logic
+  };
+
   return (
     <nav className="header-mid">
-      <SearchBar inputType={"text"} inputPlaceholder={"Search"} inputValue={inputValue} onSearchChange={(e) => handleSearchChange(e)} buttonTitle={"Enter"}/>
+      <SearchBar searchPlaceholderText={"Search"} searchTextValue={inputValue} onSearchChange={(e) => handleSearchChange(e)} 
+        buttonSearchTitle={"Enter"} onSearchClick={(e) => handleSearchClick(e)}/>
     </nav>
   );
 }
