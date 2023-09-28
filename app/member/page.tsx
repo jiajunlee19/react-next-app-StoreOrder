@@ -1,9 +1,4 @@
 import prisma from '../../prisma/prisma';
-import { Metadata } from 'next'
- 
-export const metadata: Metadata = {
-  title: 'My Page Title',
-}
 
 // Define staticSiteRendering function
 async function GetMember () {
