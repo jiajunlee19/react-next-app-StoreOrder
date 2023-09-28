@@ -1,10 +1,11 @@
 import React from 'react';
+import Link from 'next/link';
 
 function ButtonLink( {buttonTitle, buttonLink} ) {
     return (
-      <a href={buttonLink}>
+      <Link href={buttonLink}>
         <button>{buttonTitle}</button>
-      </a>
+      </Link>
     );
   }
 
