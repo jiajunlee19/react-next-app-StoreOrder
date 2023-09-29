@@ -4,7 +4,7 @@ import React from 'react';
 import Loader from '../loader';
 import Table from '../table';
 
-function ShowTable( {fetchedData, primaryKey, columnListDisplay} ) {
+function ShowTable( {loaderTitle, fetchedData, primaryKey, columnListDisplay} ) {
 
         // Filter columns based on columnList provided
         const filteredData = fetchedData.map((row) => {
@@ -50,7 +50,7 @@ function ShowTable( {fetchedData, primaryKey, columnListDisplay} ) {
 
     return (
         <React.Fragment>
-            <Loader loaderTitle={"Loading Members..."} />
+            <Loader loaderTitle={loaderTitle} />
             <Table tableHead={tableHead} tableBody={tableBody} />
         </React.Fragment>
     );
