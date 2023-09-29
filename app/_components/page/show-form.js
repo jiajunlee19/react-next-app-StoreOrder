@@ -4,31 +4,26 @@ import React from 'react';
 import ButtonClick from '../button-click';
 import Form from '../form';
 
-import {useState} from 'react';
-
-
-function ShowForm( {fetchedData, inputDictInsert, inputDictUpdate} ) {
-
-    // A state that controls whether a form should show
-    const [isShowForm, setIsShowForm] = useState(null);
-
-    // A state that controls rowData when form input changes
-    const [rowData, setRowData] = useState(fetchedData[0]);
-
+function ShowForm( {isShowForm, rowData, inputDictInsert, inputDictUpdate, onSetIsShowForm, onSetRowData} ) {
 
     function handleShowFormClick(action) {
-        setIsShowForm(action);
+        // setIsShowForm(action);
+        onSetIsShowForm(action);
     };
 
     function handleInputChange(e) {
         // set row data dynamically when input changes
-        setRowData(
+        // setRowData(
+        //     {...rowData, [e.target.name]: e.target.value}
+        // );
+        onSetRowData(
             {...rowData, [e.target.name]: e.target.value}
         );
     };
 
     function handleCancelClick() {
-        setIsShowForm(null);
+        // setIsShowForm(null);
+        onSetIsShowForm(null);
     };
 
     function handleSubmitClick(e, action) {
