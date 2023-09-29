@@ -2,20 +2,13 @@ import React from 'react';
 import HeaderLeft from '../_components/page/header-left';
 import HeaderMid from '../_components/page/header-mid';
 import HeaderRight from '../_components/page/header-right';
-import H2 from '../_components/h2';
-import ShowForm from '../_components/page/show-form';
-import ShowTable from '../_components/page/show-table';
+import Main from '../_components/page/main';
 import prisma from '../../prisma/prisma';
 
 // Define staticSiteRendering function
 async function GetMember () {
     const memberData = await prisma.member.findMany({
-      // where: { member_name: 'jiajunlee' }
-      // include: {
-      //   author: {
-      //     select: { name: true },
-      //   },
-      // },
+
     });
 
         
@@ -67,9 +60,7 @@ async function GetMember () {
           <HeaderRight />
         </header>
         <main className='main'>
-            <H2 headerTitle={"Manage Member"} /> 
-            <ShowForm fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} />
-            <ShowTable fetchedData={fetchedData} primaryKey={primaryKey} columnListDisplay={columnListDisplay} />
+            <Main headerTitle="Manage Member" fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} />
         </main>
       </React.Fragment>
     );
