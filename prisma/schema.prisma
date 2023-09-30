@@ -11,7 +11,7 @@ datasource db {
 
 //Add base tables
 model Member {
-  member_id String @db.Uuid @id
+  member_id String @db.Uuid @id @unique
   member_name String @db.VarChar(50)
   member_password String @db.Uuid
   member_bonus_points Float @db.DoublePrecision
@@ -24,7 +24,7 @@ model Member {
 }
 
 model MemberLevel {
-  member_level_id String @db.Uuid @id
+  member_level_id String @db.Uuid @id @unique
   member_level_name String @db.VarChar(50)
   bonus_points_min Float @db.DoublePrecision
   bonus_points_max Float @db.DoublePrecision
@@ -35,7 +35,7 @@ model MemberLevel {
 }
 
 model Uom {
-  uom_id String @db.Uuid @id
+  uom_id String @db.Uuid @id @unique
   uom_name String @db.VarChar(50)
   uom_created_date DateTime @db.Timestamp()
   uom_updated_date DateTime @db.Timestamp()
@@ -46,7 +46,7 @@ model Uom {
 }
 
 model Product {
-  product_id String @db.Uuid @id
+  product_id String @db.Uuid @id @unique
   product_name String @db.VarChar(50)
   uom_id String @db.Uuid
   product_unit_price Float @db.DoublePrecision
@@ -61,7 +61,7 @@ model Product {
 }
 
 model Order {
-  order_id String @db.Uuid @id
+  order_id String @db.Uuid @id @unique
   member_id String @db.Uuid
   order_created_date DateTime @db.Timestamp()
   order_updated_date DateTime @db.Timestamp()  
@@ -74,7 +74,7 @@ model Order {
 }
 
 model OrderItem {
-  order_item_id String @db.Uuid @id
+  order_item_id String @db.Uuid @id @unique
   order_id String @db.Uuid
   product_id String @db.Uuid
   order_item_quantity Float @db.DoublePrecision
