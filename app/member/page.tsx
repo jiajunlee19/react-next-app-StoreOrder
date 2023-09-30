@@ -7,6 +7,8 @@ import prisma from '../../prisma/prisma';
 
 // Define staticSiteRendering function
 async function GetMember () {
+
+    // fetch data with prisma
     const fetchedData = await prisma.member.findMany({
 
     });
@@ -29,10 +31,10 @@ async function GetMember () {
     // declare primary key
     const primaryKey = 'member_id';
 
-    // filter fetched data into given column list
+    // declare column list to be displayed, this must be a subset of fetched data columns
     const columnListDisplay = ['member_name', 'member_bonus_points']
 
-    // declare insert/update/delete URL
+    // declare insert/update/delete API URL
     const insertUrl = "/insertMember";
     const updateUrl = "/updateMember";
     const deleteUrl = "/deleteMember";
@@ -45,7 +47,7 @@ async function GetMember () {
           <HeaderRight />
         </header>
         <main className='main'>
-            <Main headerTitle="Manage Member" loaderTitle="Loading Member..." fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertUrl={insertUrl} updateUrl={updateUrl} />
+            <Main headerTitle="Manage Member" loaderTitle="Loading Member..." fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertUrl={insertUrl} updateUrl={updateUrl} deleteUrl={deleteUrl} />
         </main>
       </React.Fragment>
     );

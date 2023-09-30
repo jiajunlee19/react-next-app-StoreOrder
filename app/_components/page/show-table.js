@@ -2,7 +2,7 @@ import React from 'react';
 import Loader from '../loader';
 import Table from '../table';
 
-function ShowTable( {loaderTitle, fetchedData, primaryKey, columnListDisplay, onSetIsShowForm, onSetRowData} ) {
+function ShowTable( {loaderTitle, fetchedData, primaryKey, columnListDisplay, onSetIsShowForm, onSetRowData, deleteUrl} ) {
 
     function handleUpdateClick(e, d) {
         // setRowData({
@@ -19,15 +19,16 @@ function ShowTable( {loaderTitle, fetchedData, primaryKey, columnListDisplay, on
     };
 
 
-    function handleDeleteClick(e, d) {
-        if (!window.confirm('Are you sure to delete this item?')) {
-            // pass
-            return;
-        }
+    function handleDeleteClick(e) {
 
-        //do delete here
-        // WIP
-        return;
+        const confirmMsg = 'Are you sure to delete this item?'
+
+        //if any button other than submit is clicked, preventDefault submit routing!
+        if (!window.confirm(confirmMsg)) {
+            e.preventDefault();
+            return;
+        };
+        return; //proceed to submit form
     };
 
     // Filter columns based on columnList provided
@@ -65,7 +66,11 @@ function ShowTable( {loaderTitle, fetchedData, primaryKey, columnListDisplay, on
                 {tableData}
                 <td>
                     <button onClick={(e) => handleUpdateClick(e, fetchedData[i])}>update</button><br/>
-                    <button onClick={(e) => handleDeleteClick(e, fetchedData[i])}>delete</button>
+                    <form method="post" action={deleteUrl}>
+                        <input type="hidden" value={fetchedData[i][primaryKey]} required readOnly/>
+                        <input type="submit" value="delete" onClick={(e) => handleDeleteClick(e)}/>
+                    </form>
+                    {/* <button onClick={(e) => handleDeleteClick(e, fetchedData[i])}>delete</button> */}
                 </td>
             </tr>
         );
