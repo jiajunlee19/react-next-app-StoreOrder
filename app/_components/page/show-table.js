@@ -1,6 +1,7 @@
 import React from 'react';
 import Loader from '../loader';
 import Table from '../table';
+import FormDelete from '../form-delete';
 
 function ShowTable( {loaderTitle, fetchedData, primaryKey, columnListDisplay, onSetIsShowForm, onSetRowData, deleteUrl} ) {
 
@@ -66,11 +67,7 @@ function ShowTable( {loaderTitle, fetchedData, primaryKey, columnListDisplay, on
                 {tableData}
                 <td>
                     <button onClick={(e) => handleUpdateClick(e, fetchedData[i])}>update</button><br/>
-                    <form method="post" action={deleteUrl}>
-                        <input type="hidden" value={fetchedData[i][primaryKey]} required readOnly/>
-                        <input type="submit" value="delete" onClick={(e) => handleDeleteClick(e)}/>
-                    </form>
-                    {/* <button onClick={(e) => handleDeleteClick(e, fetchedData[i])}>delete</button> */}
+                    <FormDelete deleteUrl={deleteUrl} primaryID={fetchedData[i][primaryKey]} onDeleteClick={(e) => handleDeleteClick(e)} />
                 </td>
             </tr>
         );
