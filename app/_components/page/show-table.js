@@ -1,12 +1,10 @@
-'use client'
-
 import React from 'react';
 import Loader from '../loader';
 import Table from '../table';
 
 function ShowTable( {loaderTitle, fetchedData, primaryKey, columnListDisplay, onSetIsShowForm, onSetRowData} ) {
 
-    function handleUpdateClick(e) {
+    function handleUpdateClick(e, d) {
         // setRowData({
         //     'member_id': 'id1',
         //     'member_name': 'jiajunlee',
@@ -14,19 +12,14 @@ function ShowTable( {loaderTitle, fetchedData, primaryKey, columnListDisplay, on
         //     'member_bonus_points': 0
         // });
         // handleShowFormClick('update');
-        onSetRowData({
-            'member_id': 'id1',
-            'member_name': 'jiajunlee',
-            'member_password':'pwd1',
-            'member_bonus_points': 0
-        });
+        onSetRowData(d);
 
         onSetIsShowForm('update');
 
     };
 
 
-    function handleDeleteClick(e) {
+    function handleDeleteClick(e, d) {
         if (!window.confirm('Are you sure to delete this item?')) {
             // pass
             return;
@@ -71,8 +64,8 @@ function ShowTable( {loaderTitle, fetchedData, primaryKey, columnListDisplay, on
             <tr key={fetchedData[i][primaryKey]}>
                 {tableData}
                 <td>
-                    <button onClick={(e) => handleUpdateClick(e)}>update</button><br/>
-                    <button onClick={(e) => handleDeleteClick(e)}>delete</button>
+                    <button onClick={(e) => handleUpdateClick(e, fetchedData[i])}>update</button><br/>
+                    <button onClick={(e) => handleDeleteClick(e, fetchedData[i])}>delete</button>
                 </td>
             </tr>
         );

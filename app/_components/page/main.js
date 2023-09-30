@@ -6,6 +6,7 @@ import H2 from '../h2';
 import ShowForm from '../page/show-form';
 import ShowTable from '../page/show-table';
 
+// a client component with useState
 function Main( {headerTitle, loaderTitle, fetchedData, inputDictInsert, inputDictUpdate, primaryKey, columnListDisplay} ) {
 
     // A state that controls whether a form should show, acceptable values: null/insert/update

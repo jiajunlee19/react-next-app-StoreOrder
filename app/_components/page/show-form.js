@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react';
 import ButtonClick from '../button-click';
 import Form from '../form';
