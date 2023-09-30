@@ -2,7 +2,7 @@ import React from 'react';
 import ButtonClick from '../button-click';
 import Form from '../form';
 
-function ShowForm( {isShowForm, rowData, inputDictInsert, inputDictUpdate, onSetIsShowForm, onSetRowData} ) {
+function ShowForm( {isShowForm, rowData, inputDictInsert, inputDictUpdate, onSetIsShowForm, onSetRowData, insertUrl, updateUrl} ) {
 
     function handleShowFormClick(action) {
         // setIsShowForm(action);
@@ -47,8 +47,8 @@ function ShowForm( {isShowForm, rowData, inputDictInsert, inputDictUpdate, onSet
     return (
         <React.Fragment>
             <ButtonClick buttonTitle={"Insert Member"} onButtonClick={() => handleShowFormClick('insert')}/>
-            {isShowForm === "insert" && <Form formTitle={"Insert Member"} action={"insert"} inputDict={inputDictInsert} rowData={rowData} onInputChange={(e) => handleInputChange(e)} onCancelClick={() => handleCancelClick()} onSubmitClick={(e) => handleSubmitClick(e, 'insert')} />}
-            {isShowForm === "update" && <Form formTitle={"Update Member"} action={"update"} inputDict={inputDictUpdate} rowData={rowData} onInputChange={(e) => handleInputChange(e)} onSubmitClick={(e) => handleSubmitClick(e, 'update')} onCancelClick={() => handleCancelClick('update')} />}
+            {isShowForm === "insert" && <Form formTitle={"Insert Member"} action={"insert"} inputDict={inputDictInsert} rowData={rowData} onInputChange={(e) => handleInputChange(e)} onCancelClick={() => handleCancelClick()} onSubmitClick={(e) => handleSubmitClick(e, 'insert')} formSubmitAction={insertUrl} />}
+            {isShowForm === "update" && <Form formTitle={"Update Member"} action={"update"} inputDict={inputDictUpdate} rowData={rowData} onInputChange={(e) => handleInputChange(e)} onSubmitClick={(e) => handleSubmitClick(e, 'update')} onCancelClick={() => handleCancelClick('update')} formSubmitAction={updateUrl} />}
         </React.Fragment>
     );
 

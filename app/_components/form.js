@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Form( {formTitle, action, inputDict, rowData, onInputChange, onSubmitClick, onCancelClick} ) {
+function Form( {formTitle, action, inputDict, rowData, onInputChange, onSubmitClick, onCancelClick, formSubmitAction} ) {
 
     function generateFormInput(action, inputDict, rowData) {
 
@@ -69,7 +69,7 @@ function Form( {formTitle, action, inputDict, rowData, onInputChange, onSubmitCl
 
     return (
         <div className="form-popout">
-            <form className="form-container">
+            <form className="form-container" method="post" action={formSubmitAction}>
                 <h3>{formTitle}</h3>
                 {generateFormInput(action, inputDict, rowData)}
                 <input className="button-submit" type="submit" value="submit" onClick={onSubmitClick}/>

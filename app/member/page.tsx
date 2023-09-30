@@ -7,29 +7,9 @@ import prisma from '../../prisma/prisma';
 
 // Define staticSiteRendering function
 async function GetMember () {
-    const memberData = await prisma.member.findMany({
+    const fetchedData = await prisma.member.findMany({
 
     });
-
-        
-    // fetched data
-    // const fetchedData = 
-    // [
-    //     {
-    //         'member_id': 'id1',
-    //         'member_name': 'jiajunlee',
-    //         'member_password':'pwd1',
-    //         'member_bonus_points': 0
-    //     },
-    //     {
-    //         'member_id': 'id2',
-    //         'member_name': 'ken',
-    //         'member_password':'pwd2',
-    //         'member_bonus_points': 0
-    //     }
-    // ];
-
-    const fetchedData = memberData;
 
     // declare all input types for inputDictInsert
     const inputDictInsert = {
@@ -52,6 +32,11 @@ async function GetMember () {
     // filter fetched data into given column list
     const columnListDisplay = ['member_name', 'member_bonus_points']
 
+    // declare insert/update/delete URL
+    const insertUrl = "/insertMember";
+    const updateUrl = "/updateMember";
+    const deleteUrl = "/deleteMember";
+
     return (
       <React.Fragment>
         <header className='header'>
@@ -60,7 +45,7 @@ async function GetMember () {
           <HeaderRight />
         </header>
         <main className='main'>
-            <Main headerTitle="Manage Member" loaderTitle="Loading Member..." fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} />
+            <Main headerTitle="Manage Member" loaderTitle="Loading Member..." fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertUrl={insertUrl} updateUrl={updateUrl} />
         </main>
       </React.Fragment>
     );
