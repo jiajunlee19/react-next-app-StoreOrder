@@ -35,9 +35,9 @@ async function GetMember () {
     const columnListDisplay = ['member_name', 'member_bonus_points']
 
     // declare insert/update/delete API URL
-    const insertUrl = "/insertMember";
-    const updateUrl = "/updateMember";
-    const deleteUrl = "/deleteMember";
+    const insertUrl = "/api/member/insert";
+    const updateUrl = "/api/member/update";
+    const deleteUrl = "/api/member/delete";
 
     return (
       <React.Fragment>
