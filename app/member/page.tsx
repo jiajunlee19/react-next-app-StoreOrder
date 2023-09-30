@@ -4,7 +4,7 @@ import HeaderMid from '../_components/page/header-mid';
 import HeaderRight from '../_components/page/header-right';
 import Main from '../_components/page/main';
 import prisma from '../../prisma/prisma';
-import { deleteMember } from '@/app/_actions/member/action';
+import { deleteMember } from '@/app/_actions/member';
 
 // Define staticSiteRendering function
 async function GetMember () {
