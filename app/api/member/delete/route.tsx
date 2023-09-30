@@ -1,18 +1,15 @@
 import prisma from '../../../../prisma/prisma';
 import { NextResponse } from "next/server";
 
-export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function POST(request: Request) {
   try {
-    const id = params.id;
-    await prisma.member.delete({
-      where: {
-         member_id: id 
-      },
-    });
-
+    const res = await request.json();
+    return new NextResponse(JSON.stringify(res))
+    // await prisma.member.delete({
+    //   where: {
+    //      member_id: id 
+    //   },
+    // });
     return new NextResponse(null, { status: 204 });
   } catch (error: any) {
     if (error.code === "P2025") {
