@@ -4,7 +4,7 @@ import HeaderMid from '../_components/page/header-mid';
 import HeaderRight from '../_components/page/header-right';
 import Main from '../_components/page/main';
 import prisma from '../../prisma/prisma';
-import { deleteMember } from '@/app/_actions/member';
+import { insertMember, deleteMember } from '@/app/_actions/member';
 
 // Define staticSiteRendering function
 async function GetMember () {
@@ -35,8 +35,12 @@ async function GetMember () {
     // declare column list to be displayed, this must be a subset of fetched data columns
     const columnListDisplay = ['member_name', 'member_bonus_points']
 
+    // declare insert/update/delete async function
+    const insertAction = insertMember;
+    const deleteAction = deleteMember;
+    
     // declare insert/update/delete API URL
-    const insertUrl = "/api/member/insert";
+    // const insertUrl = "/api/member/insert";
     const updateUrl = "/api/member/update";
     // const deleteUrl = "/api/member/delete";
 
@@ -48,7 +52,7 @@ async function GetMember () {
           <HeaderRight />
         </header>
         <main className='main'>
-            <Main headerTitle="Manage Member" loaderTitle="Loading Member..." fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertUrl={insertUrl} updateUrl={updateUrl} deleteAction={deleteMember} />
+            <Main headerTitle="Manage Member" loaderTitle="Loading Member..." fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateUrl={updateUrl} deleteAction={deleteAction} />
         </main>
       </React.Fragment>
     );

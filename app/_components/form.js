@@ -1,8 +1,9 @@
 import React from 'react';
+import SubmitButton from './button-submit';
 
-function Form( {formTitle, action, inputDict, rowData, onInputChange, onSubmitClick, onCancelClick, formSubmitAction} ) {
+function Form( {formTitle, inputDict, rowData, onInputChange, onSubmitClick, onCancelClick, formSubmitAction} ) {
 
-    function generateFormInput(action, inputDict, rowData) {
+    function generateFormInput(inputDict, rowData) {
 
         // Development: Write handling method for these special input value types
         // const inputDict = {
@@ -18,7 +19,7 @@ function Form( {formTitle, action, inputDict, rowData, onInputChange, onSubmitCl
             if (inputDict[key] === 'hidden') {
                 return (
                     <React.Fragment key={key}>
-                        <input name={action+"-"+key} className="input" type="text" placeholder="placeholder" value={rowData[key]} onChange={onInputChange} required readOnly hidden />
+                        <input id={key} name={key} className="input" type="text" placeholder="placeholder" value={rowData[key]} onChange={onInputChange} required readOnly />
                     </React.Fragment>
                 );
             }
@@ -26,8 +27,8 @@ function Form( {formTitle, action, inputDict, rowData, onInputChange, onSubmitCl
             else if (inputDict[key] === 'readonly') {
                 return (
                     <React.Fragment key={key}>
-                        <label className="label" htmlFor={action+"-"+key}>{key}: </label>
-                        <input name={action+"-"+key} className="input" type="text" placeholder="placeholder" value={rowData[key]} onChange={onInputChange} required readOnly />
+                        <label className="label" htmlFor={key}>{key}: </label>
+                        <input id={key} name={key} className="input" type="text" placeholder="placeholder" value={rowData[key]} onChange={onInputChange} required readOnly />
                     </React.Fragment>
                 );
             }
@@ -35,8 +36,8 @@ function Form( {formTitle, action, inputDict, rowData, onInputChange, onSubmitCl
             else if (inputDict[key] === 'select') {
                 return (
                     <React.Fragment key={key}>
-                        <label className="label" htmlFor={action+"-"+key}>{key}: </label>
-                        <select name={action+"-"+key} className="input" onChange={onInputChange}  required>
+                        <label className="label" htmlFor={key}>{key}: </label>
+                        <select id={key} name={key} className="input" onChange={onInputChange}  required>
                             <option value={rowData[key]}>{rowData[key]}</option>
                         </select>
                     </React.Fragment>
@@ -46,8 +47,8 @@ function Form( {formTitle, action, inputDict, rowData, onInputChange, onSubmitCl
             else if (inputDict[key] === 'number') {
                 return (
                     <React.Fragment key={key}>
-                        <label className="label" htmlFor={action+"-"+key}>{key}: </label>
-                        <input name={action+"-"+key} className="input" type="number" step="any" onChange={onInputChange} required />
+                        <label className="label" htmlFor={key}>{key}: </label>
+                        <input id={key} name={key} className="input" type="number" step="any" onChange={onInputChange} required />
                     </React.Fragment>
                 );
             }
@@ -55,8 +56,8 @@ function Form( {formTitle, action, inputDict, rowData, onInputChange, onSubmitCl
             else {
                 return (
                     <React.Fragment key={key}>
-                        <label className="label" htmlFor={action+"-"+key}>{key}: </label>
-                        <input name={action+"-"+key} className="input" type={inputDict[key]} onChange={onInputChange} required />
+                        <label className="label" htmlFor={key}>{key}: </label>
+                        <input id={key} name={key} className="input" type={inputDict[key]} onChange={onInputChange} required />
                     </React.Fragment>
                 );
             }
@@ -69,10 +70,10 @@ function Form( {formTitle, action, inputDict, rowData, onInputChange, onSubmitCl
 
     return (
         <div className="form-popout">
-            <form className="form-container" method="post" action={formSubmitAction}>
+            <form className="form-container" action={formSubmitAction}>
                 <h3>{formTitle}</h3>
-                {generateFormInput(action, inputDict, rowData)}
-                <input className="button-submit" type="submit" value="submit" onClick={onSubmitClick}/>
+                {generateFormInput(inputDict, rowData)}
+                <SubmitButton buttonClass="button-submit" buttonTitle="submit" onButtonClick={onSubmitClick} />
                 <button className="button-cancel" onClick={onCancelClick}>cancel</button>
             </form>
         </div>

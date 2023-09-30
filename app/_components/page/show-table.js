@@ -45,7 +45,7 @@ function ShowTable( {loaderTitle, fetchedData, primaryKey, columnListDisplay, on
     //taking 1st fetched data row key to generate table headers
     const tableHead =
     <tr>
-        {Object.keys(filteredData[0]).map(key => {
+        {Object.keys(filteredData[0] || {}).map(key => {
             return (
                 <th key={key}>{key}</th>      
             );
