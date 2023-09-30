@@ -12,7 +12,7 @@ function Main( {headerTitle, loaderTitle, fetchedData, inputDictInsert, inputDic
 
     // Control form
     const initialState = { message: null }
-    const [state, deleteUrl] = useFormState(deleteAction, initialState);
+    const [, deleteUrl] = useFormState(deleteAction, initialState);
 
     // A state that controls whether a form should show, acceptable values: null/insert/update
     const [isShowForm, setIsShowForm] = useState(null);
