@@ -5,9 +5,14 @@ import {useState} from 'react';
 import H2 from '../h2';
 import ShowForm from '../page/show-form';
 import ShowTable from '../page/show-table';
+import { experimental_useFormState as useFormState } from 'react-dom';
 
 // a client component with useState
-function Main( {headerTitle, loaderTitle, fetchedData, inputDictInsert, inputDictUpdate, primaryKey, columnListDisplay, insertUrl, updateUrl, deleteUrl} ) {
+function Main( {headerTitle, loaderTitle, fetchedData, inputDictInsert, inputDictUpdate, primaryKey, columnListDisplay, insertUrl, updateUrl, deleteAction} ) {
+
+    // Control form
+    const initialState = { message: null }
+    const [state, deleteUrl] = useFormState(deleteAction, initialState);
 
     // A state that controls whether a form should show, acceptable values: null/insert/update
     const [isShowForm, setIsShowForm] = useState(null);

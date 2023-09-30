@@ -4,6 +4,7 @@ import HeaderMid from '../_components/page/header-mid';
 import HeaderRight from '../_components/page/header-right';
 import Main from '../_components/page/main';
 import prisma from '../../prisma/prisma';
+import { deleteMember } from '@/app/_actions/member/action';
 
 // Define staticSiteRendering function
 async function GetMember () {
@@ -37,7 +38,7 @@ async function GetMember () {
     // declare insert/update/delete API URL
     const insertUrl = "/api/member/insert";
     const updateUrl = "/api/member/update";
-    const deleteUrl = "/api/member/delete";
+    // const deleteUrl = "/api/member/delete";
 
     return (
       <React.Fragment>
@@ -47,7 +48,7 @@ async function GetMember () {
           <HeaderRight />
         </header>
         <main className='main'>
-            <Main headerTitle="Manage Member" loaderTitle="Loading Member..." fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertUrl={insertUrl} updateUrl={updateUrl} deleteUrl={deleteUrl} />
+            <Main headerTitle="Manage Member" loaderTitle="Loading Member..." fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertUrl={insertUrl} updateUrl={updateUrl} deleteAction={deleteMember} />
         </main>
       </React.Fragment>
     );

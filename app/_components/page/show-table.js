@@ -60,14 +60,14 @@ function ShowTable( {loaderTitle, fetchedData, primaryKey, columnListDisplay, on
         const tableData = Object.keys(row).map(column => {
             return  <td key={column}>{row[column]}</td>;
         });
-
+        
         return (
             //use each table row UID as key value 
             <tr key={fetchedData[i][primaryKey]}>
                 {tableData}
                 <td>
                     <button onClick={(e) => handleUpdateClick(e, fetchedData[i])}>update</button><br/>
-                    <FormDelete deleteUrl={deleteUrl} primaryID={fetchedData[i][primaryKey]} onDeleteClick={(e) => handleDeleteClick(e)} />
+                    <FormDelete deleteUrl={deleteUrl} primaryKey={primaryKey} primaryID={fetchedData[i][primaryKey]} onDeleteClick={(e) => handleDeleteClick(e)} />
                 </td>
             </tr>
         );
