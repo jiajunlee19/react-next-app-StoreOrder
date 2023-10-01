@@ -3,7 +3,7 @@ import Loader from '../loader';
 import Table from '../table';
 import FormDelete from '../form-delete';
 
-function ShowTable( {loaderClassName, loaderTitle, fetchedData, primaryKey, columnListDisplay, onSetIsShowForm, onSetRowData, deleteUrl} ) {
+function ShowTable( {loaderClassName, loaderTitle, fetchedData, primaryKey, columnListDisplay, onSetIsShowForm, onSetRowData, deleteState, deleteUrl} ) {
 
     function handleUpdateClick(e, d) {
         // setRowData({
@@ -67,7 +67,7 @@ function ShowTable( {loaderClassName, loaderTitle, fetchedData, primaryKey, colu
                 {tableData}
                 <td>
                     <button onClick={(e) => handleUpdateClick(e, fetchedData[i])}>update</button><br/>
-                    <FormDelete deleteUrl={deleteUrl} primaryKey={primaryKey} primaryID={fetchedData[i][primaryKey]} onDeleteClick={(e) => handleDeleteClick(e)} />
+                    <FormDelete deleteState={deleteState} deleteUrl={deleteUrl} primaryKey={primaryKey} primaryID={fetchedData[i][primaryKey]} onDeleteClick={(e) => handleDeleteClick(e)} />
                 </td>
             </tr>
         );

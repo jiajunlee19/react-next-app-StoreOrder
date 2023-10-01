@@ -2,7 +2,7 @@ import React from 'react';
 import ButtonClick from '../button-click';
 import Form from '../form';
 
-function ShowForm( {isShowForm, rowData, inputDictInsert, inputDictUpdate, onSetIsShowForm, onSetRowData, insertUrl, updateUrl} ) {
+function ShowForm( {isShowForm, rowData, inputDictInsert, inputDictUpdate, onSetIsShowForm, onSetRowData, insertState, insertUrl, updateState, updateUrl} ) {
 
     function handleShowFormClick(action) {
         // setIsShowForm(action);
@@ -47,8 +47,8 @@ function ShowForm( {isShowForm, rowData, inputDictInsert, inputDictUpdate, onSet
     return (
         <React.Fragment>
             <ButtonClick buttonTitle={"Insert Member"} onButtonClick={() => handleShowFormClick('insert')}/>
-            <Form formClassName={isShowForm === 'insert' ? 'form-popout': 'form-popout-hidden'} formTitle={"Insert Member"} inputDict={inputDictInsert} rowData={rowData} onInputChange={(e) => handleInputChange(e)} onCancelClick={() => handleCancelClick()} onSubmitClick={(e) => handleSubmitClick(e, 'insert')} formSubmitAction={insertUrl} />
-            <Form formClassName={isShowForm === 'update' ? 'form-popout': 'form-popout-hidden'} formTitle={"Update Member"} inputDict={inputDictUpdate} rowData={rowData} onInputChange={(e) => handleInputChange(e)} onSubmitClick={(e) => handleSubmitClick(e, 'update')} onCancelClick={() => handleCancelClick('update')} formSubmitAction={updateUrl} />
+            <Form formClassName={isShowForm === 'insert' ? 'form-popout': 'form-popout-hidden'} formTitle={"Insert Member"} inputDict={inputDictInsert} rowData={rowData} onInputChange={(e) => handleInputChange(e)} onCancelClick={() => handleCancelClick()} onSubmitClick={(e) => handleSubmitClick(e, 'insert')} formSubmitState={insertState} formSubmitAction={insertUrl} />
+            <Form formClassName={isShowForm === 'update' ? 'form-popout': 'form-popout-hidden'} formTitle={"Update Member"} inputDict={inputDictUpdate} rowData={rowData} onInputChange={(e) => handleInputChange(e)} onSubmitClick={(e) => handleSubmitClick(e, 'update')} onCancelClick={() => handleCancelClick('update')} formSubmitState={updateState} formSubmitAction={updateUrl} />
         </React.Fragment>
     );
 

@@ -12,9 +12,9 @@ function Main( {headerTitle, loaderClassName, loaderTitle, fetchedData, inputDic
 
     // Control form
     const initialState = { message: null }
-    const [, insertUrl] = useFormState(insertAction, initialState);
-    const [, updateUrl] = useFormState(updateAction, initialState);
-    const [, deleteUrl] = useFormState(deleteAction, initialState);
+    const [insertState, insertUrl] = useFormState(insertAction, initialState);
+    const [updateState, updateUrl] = useFormState(updateAction, initialState);
+    const [deleteState, deleteUrl] = useFormState(deleteAction, initialState);
 
     // A state that controls whether a form should show, acceptable values: null/insert/update
     const [isShowForm, setIsShowForm] = useState(null);
@@ -34,8 +34,8 @@ function Main( {headerTitle, loaderClassName, loaderTitle, fetchedData, inputDic
     return (
       <React.Fragment>
         <H2 headerTitle={headerTitle} /> 
-        <ShowForm isShowForm={isShowForm} rowData={rowData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} onSetIsShowForm={(action) => setIsShowForm(action)} onSetRowData={(d) => setRowData(d)} insertUrl={insertUrl} updateUrl={updateUrl} />
-        <ShowTable loaderClassName={loaderClassName} loaderTitle={loaderTitle} fetchedData={fetchedData} primaryKey={primaryKey} columnListDisplay={columnListDisplay} onSetIsShowForm={(action) => setIsShowForm(action)} onSetRowData={(d) => setRowData(d)} deleteUrl={deleteUrl} />
+        <ShowForm isShowForm={isShowForm} rowData={rowData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} onSetIsShowForm={(action) => setIsShowForm(action)} onSetRowData={(d) => setRowData(d)} insertState={insertState} insertUrl={insertUrl} updateState={updateState} updateUrl={updateUrl} />
+        <ShowTable loaderClassName={loaderClassName} loaderTitle={loaderTitle} fetchedData={fetchedData} primaryKey={primaryKey} columnListDisplay={columnListDisplay} onSetIsShowForm={(action) => setIsShowForm(action)} onSetRowData={(d) => setRowData(d)} deleteState={deleteState} deleteUrl={deleteUrl} />
       </React.Fragment>
     );
   };
