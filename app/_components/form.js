@@ -1,7 +1,7 @@
 import React from 'react';
 import SubmitButton from './button-submit';
 
-function Form( {formTitle, inputDict, rowData, onInputChange, onSubmitClick, onCancelClick, formSubmitAction} ) {
+function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onSubmitClick, onCancelClick, formSubmitAction} ) {
 
     function generateFormInput(inputDict, rowData) {
 
@@ -19,7 +19,7 @@ function Form( {formTitle, inputDict, rowData, onInputChange, onSubmitClick, onC
             if (inputDict[key] === 'hidden') {
                 return (
                     <React.Fragment key={key}>
-                        <input id={key} name={key} className="input" type="text" placeholder="placeholder" value={rowData[key]} onChange={onInputChange} required readOnly hidden />
+                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData[key]} onChange={onInputChange} required readOnly hidden />
                     </React.Fragment>
                 );
             }
@@ -28,7 +28,7 @@ function Form( {formTitle, inputDict, rowData, onInputChange, onSubmitClick, onC
                 return (
                     <React.Fragment key={key}>
                         <label className="label" htmlFor={key}>{key}: </label>
-                        <input id={key} name={key} className="input" type="text" placeholder="placeholder" value={rowData[key]} onChange={onInputChange} required readOnly />
+                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData[key]} onChange={onInputChange} required readOnly />
                     </React.Fragment>
                 );
             }
@@ -37,7 +37,7 @@ function Form( {formTitle, inputDict, rowData, onInputChange, onSubmitClick, onC
                 return (
                     <React.Fragment key={key}>
                         <label className="label" htmlFor={key}>{key}: </label>
-                        <select id={key} name={key} className="input" onChange={onInputChange}  required>
+                        <select name={key} className="input" onChange={onInputChange}  required>
                             <option value={rowData[key]}>{rowData[key]}</option>
                         </select>
                     </React.Fragment>
@@ -48,7 +48,7 @@ function Form( {formTitle, inputDict, rowData, onInputChange, onSubmitClick, onC
                 return (
                     <React.Fragment key={key}>
                         <label className="label" htmlFor={key}>{key}: </label>
-                        <input id={key} name={key} className="input" type="number" step="any" onChange={onInputChange} required />
+                        <input name={key} className="input" type="number" step="any" onChange={onInputChange} required />
                     </React.Fragment>
                 );
             }
@@ -57,7 +57,7 @@ function Form( {formTitle, inputDict, rowData, onInputChange, onSubmitClick, onC
                 return (
                     <React.Fragment key={key}>
                         <label className="label" htmlFor={key}>{key}: </label>
-                        <input id={key} name={key} className="input" type={inputDict[key]} onChange={onInputChange} required />
+                        <input name={key} className="input" type={inputDict[key]} onChange={onInputChange} required />
                     </React.Fragment>
                 );
             }
@@ -69,11 +69,11 @@ function Form( {formTitle, inputDict, rowData, onInputChange, onSubmitClick, onC
     };
 
     return (
-        <div className="form-popout">
+        <div className={formClassName}>
             <form className="form-container" action={formSubmitAction}>
                 <h3>{formTitle}</h3>
                 {generateFormInput(inputDict, rowData)}
-                <SubmitButton buttonClass="button-submit" buttonTitle="submit" onButtonClick={onSubmitClick} buttonPendingTitle="submitting" />
+                <SubmitButton buttonClass="button-submit" buttonTitle="submit" onButtonClick={onSubmitClick} />
                 <button className="button-cancel" onClick={onCancelClick}>cancel</button>
             </form>
         </div>

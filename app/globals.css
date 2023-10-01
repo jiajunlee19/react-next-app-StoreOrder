@@ -59,10 +59,9 @@ button, .button-insert, .button-update {
   cursor: pointer;
 }
 
-/* The popup form covering 100% on top of screen centre - hidden by default state */
+/* The popup form covering 100% on top of screen centre */
 .form-popout {
   background-color: white;
-  /* display: none; */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -71,6 +70,20 @@ button, .button-insert, .button-update {
   transform: translate(-50%, -50%);
   border: 3px solid #f1f1f1;
   z-index: 1;
+}
+
+/* Hide the popout form undernealth and make the size 0% */
+.form-popout-hidden {
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 0%;
+  height: 0%;
+  transform: translate(-50%, -50%);
+  border: 3px solid #f1f1f1;
+  z-index: -1;
+  opacity: 0;
 }
 
 .form-container {

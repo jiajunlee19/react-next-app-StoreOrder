@@ -41,14 +41,14 @@ function ShowForm( {isShowForm, rowData, inputDictInsert, inputDictUpdate, onSet
             e.preventDefault();
             return;
         };
-        // onSetIsShowForm(null); //proceed to submit form
+        onSetIsShowForm(null); //proceed to submit form
     };
 
     return (
         <React.Fragment>
             <ButtonClick buttonTitle={"Insert Member"} onButtonClick={() => handleShowFormClick('insert')}/>
-            {isShowForm === "insert" && <Form formTitle={"Insert Member"} inputDict={inputDictInsert} rowData={rowData} onInputChange={(e) => handleInputChange(e)} onCancelClick={() => handleCancelClick()} onSubmitClick={(e) => handleSubmitClick(e, 'insert')} formSubmitAction={insertUrl} />}
-            {isShowForm === "update" && <Form formTitle={"Update Member"} inputDict={inputDictUpdate} rowData={rowData} onInputChange={(e) => handleInputChange(e)} onSubmitClick={(e) => handleSubmitClick(e, 'update')} onCancelClick={() => handleCancelClick('update')} formSubmitAction={updateUrl} />}
+            <Form formClassName={isShowForm === 'insert' ? 'form-popout': 'form-popout-hidden'} formTitle={"Insert Member"} inputDict={inputDictInsert} rowData={rowData} onInputChange={(e) => handleInputChange(e)} onCancelClick={() => handleCancelClick()} onSubmitClick={(e) => handleSubmitClick(e, 'insert')} formSubmitAction={insertUrl} />
+            <Form formClassName={isShowForm === 'update' ? 'form-popout': 'form-popout-hidden'} formTitle={"Update Member"} inputDict={inputDictUpdate} rowData={rowData} onInputChange={(e) => handleInputChange(e)} onSubmitClick={(e) => handleSubmitClick(e, 'update')} onCancelClick={() => handleCancelClick('update')} formSubmitAction={updateUrl} />
         </React.Fragment>
     );
 
