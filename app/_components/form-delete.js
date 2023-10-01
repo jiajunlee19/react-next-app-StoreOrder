@@ -6,8 +6,7 @@ function FormDelete( {deleteUrl, primaryKey, primaryID, onDeleteClick} ) {
     return (
         <form action={deleteUrl}>
             <input type="hidden" id={primaryKey} name={primaryKey} value={primaryID} required readOnly/>
-            <SubmitButton buttonClass="button" buttonTitle="delete" onButtonClick={onDeleteClick}/>
-            {/* <input type="submit" value="delete" onClick={onDeleteClick}/> */}
+            <SubmitButton buttonClass="button" buttonTitle="delete" onButtonClick={onDeleteClick} buttonPendingTitle="deleting"/>
         </form>
     );
 };

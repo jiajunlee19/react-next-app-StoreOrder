@@ -73,7 +73,7 @@ function Form( {formTitle, inputDict, rowData, onInputChange, onSubmitClick, onC
             <form className="form-container" action={formSubmitAction}>
                 <h3>{formTitle}</h3>
                 {generateFormInput(inputDict, rowData)}
-                <SubmitButton buttonClass="button-submit" buttonTitle="submit" onButtonClick={onSubmitClick} />
+                <SubmitButton buttonClass="button-submit" buttonTitle="submit" onButtonClick={onSubmitClick} buttonPendingTitle="submitting" />
                 <button className="button-cancel" onClick={onCancelClick}>cancel</button>
             </form>
         </div>
