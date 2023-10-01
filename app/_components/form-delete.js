@@ -4,7 +4,10 @@ import SubmitButton from '../_components/button-submit';
 
 function FormDelete( {deleteUrl, primaryKey, primaryID, onDeleteClick} ) {
     return (
-        <form action={deleteUrl}>
+        <form action={ async (formData) => {
+                await deleteUrl(formData);
+            }
+        }>
             <input type="hidden" name={primaryKey} value={primaryID} required readOnly/>
             <SubmitButton buttonClass="button" buttonTitle="delete" onButtonClick={onDeleteClick} />
         </form>
