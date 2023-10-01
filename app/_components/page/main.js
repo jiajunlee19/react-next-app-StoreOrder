@@ -18,8 +18,17 @@ function Main( {headerTitle, loaderTitle, fetchedData, inputDictInsert, inputDic
     // A state that controls whether a form should show, acceptable values: null/insert/update
     const [isShowForm, setIsShowForm] = useState(null);
 
+    // Init rowData column keys accordingly for insert/update
+    let initRowData = fetchedData[0];
+    if (isShowForm === 'insert') {
+        initRowData = Object.fromEntries(Object.entries(fetchedData[0]).filter( ([key,val]) => Object.keys(inputDictInsert).includes(key)));
+    }
+    else if (isShowForm === 'update') {
+        initRowData = Object.fromEntries(Object.entries(fetchedData[0]).filter( ([key,val]) => Object.keys(inputDictUpdate).includes(key)));
+    }
+
     // A state that controls rowData when form input changes
-    const [rowData, setRowData] = useState(fetchedData[0]);
+    const [rowData, setRowData] = useState(initRowData);
 
     return (
       <React.Fragment>

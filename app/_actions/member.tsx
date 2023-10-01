@@ -5,6 +5,8 @@ import { v5 as uuidv5 } from 'uuid';
 import {z} from 'zod';
 import { revalidatePath } from 'next/cache';
 import prisma from '@/prisma/prisma';
+import { redirect } from 'next/navigation';
+import { NextResponse } from 'next/server';
 
 export async function insertMember(prevState: any, formData: FormData) {
 
@@ -20,7 +22,7 @@ export async function insertMember(prevState: any, formData: FormData) {
     const schema = z.object({
         member_id: z.string().uuid(),
         member_name: z.string(),
-        member_password: z.string(),
+        member_password: z.string().uuid(),
         member_bonus_points: z.coerce.number().nonnegative(),
         member_created_date: z.date(),
         member_updated_date: z.date()
@@ -28,7 +30,7 @@ export async function insertMember(prevState: any, formData: FormData) {
     const data = schema.parse({
         member_id: uuidv5(formData.get('member_name'), UUID5_SECRET),
         member_name: formData.get('member_name'),
-        member_password: formData.get('member_password'),
+        member_password: uuidv5(formData.get('member_password'), UUID5_SECRET),
         member_bonus_points: formData.get('member_bonus_points'),
         member_created_date: now,
         member_updated_date: now
@@ -40,8 +42,6 @@ export async function insertMember(prevState: any, formData: FormData) {
         const result = await prisma.member.create({
             data: data,
         });
-
-        console.log(data)
 
         // Check existing cache, revalidate with the fetched data
         revalidatePath('/member');
