@@ -3,7 +3,7 @@ import Loader from '../loader';
 import Table from '../table';
 import FormDelete from '../form-delete';
 
-function ShowTable( {loaderTitle, fetchedData, primaryKey, columnListDisplay, onSetIsShowForm, onSetRowData, deleteUrl} ) {
+function ShowTable( {loaderClassName, loaderTitle, fetchedData, primaryKey, columnListDisplay, onSetIsShowForm, onSetRowData, deleteUrl} ) {
 
     function handleUpdateClick(e, d) {
         // setRowData({
@@ -76,7 +76,7 @@ function ShowTable( {loaderTitle, fetchedData, primaryKey, columnListDisplay, on
 
     return (
         <React.Fragment>
-            <Loader loaderTitle={loaderTitle} />
+            <Loader loaderClassName={loaderClassName} loaderTitle={loaderTitle} />
             <Table tableHead={tableHead} tableBody={tableBody} />
         </React.Fragment>
     );

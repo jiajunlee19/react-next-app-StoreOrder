@@ -49,6 +49,11 @@ code {
   margin: 1% 0%;
 }
 
+.loader-hidden {
+  margin: 1% 0%;
+  display: none;
+}
+
 .table-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

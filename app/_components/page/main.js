@@ -8,7 +8,7 @@ import ShowTable from '../page/show-table';
 import { experimental_useFormState as useFormState } from 'react-dom';
 
 // a client component with useState
-function Main( {headerTitle, loaderTitle, fetchedData, inputDictInsert, inputDictUpdate, primaryKey, columnListDisplay, insertAction, updateAction, deleteAction} ) {
+function Main( {headerTitle, loaderClassName, loaderTitle, fetchedData, inputDictInsert, inputDictUpdate, primaryKey, columnListDisplay, insertAction, updateAction, deleteAction} ) {
 
     // Control form
     const initialState = { message: null }
@@ -22,10 +22,10 @@ function Main( {headerTitle, loaderTitle, fetchedData, inputDictInsert, inputDic
     // Init rowData column keys accordingly for insert/update
     let initRowData = fetchedData[0];
     if (isShowForm === 'insert') {
-        initRowData = Object.fromEntries(Object.entries(fetchedData[0]).filter( ([key,val]) => Object.keys(inputDictInsert).includes(key)));
+        initRowData = Object.fromEntries(Object.entries(fetchedData[0] || {}).filter( ([key,val]) => Object.keys(inputDictInsert).includes(key)));
     }
     else if (isShowForm === 'update') {
-        initRowData = Object.fromEntries(Object.entries(fetchedData[0]).filter( ([key,val]) => Object.keys(inputDictUpdate).includes(key)));
+        initRowData = Object.fromEntries(Object.entries(fetchedData[0] || {}).filter( ([key,val]) => Object.keys(inputDictUpdate).includes(key)));
     }
 
     // A state that controls rowData when form input changes
@@ -35,7 +35,7 @@ function Main( {headerTitle, loaderTitle, fetchedData, inputDictInsert, inputDic
       <React.Fragment>
         <H2 headerTitle={headerTitle} /> 
         <ShowForm isShowForm={isShowForm} rowData={rowData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} onSetIsShowForm={(action) => setIsShowForm(action)} onSetRowData={(d) => setRowData(d)} insertUrl={insertUrl} updateUrl={updateUrl} />
-        <ShowTable loaderTitle={loaderTitle} fetchedData={fetchedData} primaryKey={primaryKey} columnListDisplay={columnListDisplay} onSetIsShowForm={(action) => setIsShowForm(action)} onSetRowData={(d) => setRowData(d)} deleteUrl={deleteUrl} />
+        <ShowTable loaderClassName={loaderClassName} loaderTitle={loaderTitle} fetchedData={fetchedData} primaryKey={primaryKey} columnListDisplay={columnListDisplay} onSetIsShowForm={(action) => setIsShowForm(action)} onSetRowData={(d) => setRowData(d)} deleteUrl={deleteUrl} />
       </React.Fragment>
     );
   };

@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Loader( {loaderTitle} ) {
+function Loader( {loaderClassName, loaderTitle} ) {
     return (
-        <div role="status" className="loader">
+        <div role="status" className={loaderClassName}>
             <span>{loaderTitle}</span>
         </div>
     );

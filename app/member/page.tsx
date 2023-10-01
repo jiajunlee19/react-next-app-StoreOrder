@@ -3,16 +3,13 @@ import HeaderLeft from '../_components/page/header-left';
 import HeaderMid from '../_components/page/header-mid';
 import HeaderRight from '../_components/page/header-right';
 import Main from '../_components/page/main';
-import prisma from '../../prisma/prisma';
-import { insertMember, updateMember, deleteMember } from '@/app/_actions/member';
+import { getMember, insertMember, updateMember, deleteMember } from '@/app/_actions/member';
 
 // Define staticSiteRendering function
-async function GetMember () {
+async function Member () {
 
-    // fetch data with prisma
-    const fetchedData = await prisma.member.findMany({
-
-    });
+    // fetch data
+    const fetchedData = await getMember();
 
     // declare all input types for inputDictInsert
     const inputDictInsert = {
@@ -48,10 +45,10 @@ async function GetMember () {
           <HeaderRight />
         </header>
         <main className='main'>
-            <Main headerTitle="Manage Member" loaderTitle="Loading Member..." fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} />
+            <Main headerTitle="Manage Member" loaderClassName="loader-hidden" loaderTitle="Loading Member..." fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} />
         </main>
       </React.Fragment>
     );
   };
 
-export default GetMember;
+export default Member;

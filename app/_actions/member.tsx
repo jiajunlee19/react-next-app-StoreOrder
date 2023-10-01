@@ -5,8 +5,26 @@ import { v5 as uuidv5 } from 'uuid';
 import {z} from 'zod';
 import { revalidatePath } from 'next/cache';
 import prisma from '@/prisma/prisma';
-import { redirect } from 'next/navigation';
-import { NextResponse } from 'next/server';
+
+export async function getMember() {
+
+    try {
+
+        // get result from prisma
+        const result = await prisma.member.findMany({
+
+        });
+
+        // Check existing cache, revalidate with the fetched data
+        revalidatePath('/member');
+
+        return result
+
+    } catch(e) {
+        return { message: 'Failed to get the items' }
+    }
+
+};
 
 export async function insertMember(prevState: any, formData: FormData) {
 

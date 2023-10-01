@@ -19,7 +19,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onS
             if (inputDict[key] === 'hidden') {
                 return (
                     <React.Fragment key={key}>
-                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData[key]} onChange={onInputChange} required readOnly hidden />
+                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData?.[key]} onChange={onInputChange} required readOnly hidden />
                     </React.Fragment>
                 );
             }
@@ -28,7 +28,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onS
                 return (
                     <React.Fragment key={key}>
                         <label className="label" htmlFor={key}>{key}: </label>
-                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData[key]} onChange={onInputChange} required readOnly />
+                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData?.[key]} onChange={onInputChange} required readOnly />
                     </React.Fragment>
                 );
             }
@@ -38,7 +38,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onS
                     <React.Fragment key={key}>
                         <label className="label" htmlFor={key}>{key}: </label>
                         <select name={key} className="input" onChange={onInputChange}  required>
-                            <option value={rowData[key]}>{rowData[key]}</option>
+                            <option value={rowData?.[key]}>{rowData?.[key]}</option>
                         </select>
                     </React.Fragment>
                 );
