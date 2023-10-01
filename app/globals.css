@@ -95,7 +95,7 @@ button, .button-insert, .button-update {
 }
 
 .button-submit {
-  width: 10%;
+  width: 20%;
   margin: 2% 0%;
   padding: 1%;
   background-color: green;
@@ -105,7 +105,7 @@ button, .button-insert, .button-update {
 }
 
 .button-cancel {
-  width: 10%;
+  width: 20%;
   margin: 2% 0%;
   padding: 1%;
   background-color: red;
