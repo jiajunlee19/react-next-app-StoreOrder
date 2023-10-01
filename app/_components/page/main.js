@@ -8,11 +8,12 @@ import ShowTable from '../page/show-table';
 import { experimental_useFormState as useFormState } from 'react-dom';
 
 // a client component with useState
-function Main( {headerTitle, loaderTitle, fetchedData, inputDictInsert, inputDictUpdate, primaryKey, columnListDisplay, insertAction, updateUrl, deleteAction} ) {
+function Main( {headerTitle, loaderTitle, fetchedData, inputDictInsert, inputDictUpdate, primaryKey, columnListDisplay, insertAction, updateAction, deleteAction} ) {
 
     // Control form
     const initialState = { message: null }
     const [, insertUrl] = useFormState(insertAction, initialState);
+    const [, updateUrl] = useFormState(updateAction, initialState);
     const [, deleteUrl] = useFormState(deleteAction, initialState);
 
     // A state that controls whether a form should show, acceptable values: null/insert/update

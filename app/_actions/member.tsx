@@ -46,10 +46,60 @@ export async function insertMember(prevState: any, formData: FormData) {
         // Check existing cache, revalidate with the fetched data
         revalidatePath('/member');
 
+
         return { message: `Successfully inserted ${data['member_id']}` }
 
     } catch(e) {
         return { message: 'Failed to insert the item' }
+    }
+
+};
+
+export async function updateMember(prevState: any, formData: FormData) {
+
+    // Retrive environment variables
+    dotenv.config({ path: '@/env/.env' });
+    const UUID5_NAMESPACE = process.env.UUID5_NAMESPACE;
+    const UUID5_SECRET = uuidv5(UUID5_NAMESPACE, uuidv5.DNS)
+
+    // Set current datetime
+    const now = new Date();
+
+    // set zod schema to validate form data
+    const schema = z.object({
+        member_id: z.string().uuid(),
+        member_name: z.string(),
+        member_password: z.string().uuid(),
+        member_bonus_points: z.coerce.number().nonnegative(),
+        member_updated_date: z.date()
+    });
+    const data = schema.parse({
+        member_id: formData.get('member_id'),
+        member_name: formData.get('member_name'),
+        member_password: uuidv5(formData.get('member_password'), UUID5_SECRET),
+        member_bonus_points: formData.get('member_bonus_points'),
+        member_updated_date: now
+    });
+
+    try {
+
+        // get result from prisma
+        const result = await prisma.member.update({
+            where: {
+                member_id: data['member_id']
+            },
+
+            data: data,
+        });
+
+        // Check existing cache, revalidate with the fetched data
+        revalidatePath('/member');
+
+
+        return { message: `Successfully updated ${data['member_id']}` }
+
+    } catch(e) {
+        return { message: 'Failed to update the item' }
     }
 
 };

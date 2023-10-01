@@ -19,7 +19,7 @@ function Form( {formTitle, inputDict, rowData, onInputChange, onSubmitClick, onC
             if (inputDict[key] === 'hidden') {
                 return (
                     <React.Fragment key={key}>
-                        <input id={key} name={key} className="input" type="text" placeholder="placeholder" value={rowData[key]} onChange={onInputChange} required readOnly />
+                        <input id={key} name={key} className="input" type="text" placeholder="placeholder" value={rowData[key]} onChange={onInputChange} required readOnly hidden />
                     </React.Fragment>
                 );
             }
