@@ -45,7 +45,7 @@ async function Member () {
           <HeaderRight />
         </header>
         <main className='main'>
-            <Main headerTitle="Manage Member" loaderClassName="loader-hidden" loaderTitle="Loading Member..." fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} />
+            <Main headerTitle="Manage Member" fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} />
         </main>
       </React.Fragment>
     );

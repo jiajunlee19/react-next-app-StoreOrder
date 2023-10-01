@@ -8,7 +8,7 @@ import ShowTable from '../page/show-table';
 import { experimental_useFormState as useFormState } from 'react-dom';
 
 // a client component with useState
-function Main( {headerTitle, loaderClassName, loaderTitle, fetchedData, inputDictInsert, inputDictUpdate, primaryKey, columnListDisplay, insertAction, updateAction, deleteAction} ) {
+function Main( {headerTitle, fetchedData, inputDictInsert, inputDictUpdate, primaryKey, columnListDisplay, insertAction, updateAction, deleteAction} ) {
 
     // Control form
     const initialState = { message: null }
@@ -30,6 +30,25 @@ function Main( {headerTitle, loaderClassName, loaderTitle, fetchedData, inputDic
 
     // A state that controls rowData when form input changes
     const [rowData, setRowData] = useState(initRowData);
+
+    // Configure loader based on state message
+    let loaderClassName = 'loader-hidden';
+    let loaderTitle = '';
+    if (insertState?.message || updateState?.message || deleteState?.message) {
+      // show loader
+      loaderClassName = 'loader';
+
+      // show latest updated message
+      if (insertState.message && insertState.message !== loaderTitle) {
+        loaderTitle = insertState.message;
+      }
+      else if (updateState.message && updateState.message !== loaderTitle) {
+        loaderTitle = updateState.message;
+      }
+      else if (deleteState.message && deleteState.message !== loaderTitle) {
+        loaderTitle = deleteState.message;
+      }
+    }
 
     return (
       <React.Fragment>

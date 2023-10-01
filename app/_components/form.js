@@ -76,6 +76,12 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onS
         <div className={formClassName}>
             <form ref={formRef} className="form-container" action={ async (formData) => {
                     await formSubmitAction(formData);
+                    // if (formSubmitState?.message) {
+                    //     // error
+                    // }
+                    // else {
+                    //     // no error
+                    // }
                     // alert(formSubmitState.message);
                     formRef.current?.reset();
                 }
