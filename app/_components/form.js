@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { use } from 'react';
+import { useRef } from 'react';
 import SubmitButton from './button-submit';
 
 function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onSubmitClick, onCancelClick, formSubmitAction} ) {
+
+    // declare formRef, we can perform form-related action based on this later
+    const formRef = useRef(null);
 
     function generateFormInput(inputDict, rowData) {
 
@@ -70,7 +74,11 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onS
 
     return (
         <div className={formClassName}>
-            <form className="form-container" action={formSubmitAction}>
+            <form ref={formRef} className="form-container" action={ async (formData) => {
+                    await formSubmitAction(formData);
+                    formRef.current?.reset();
+                }
+            }>
                 <h3>{formTitle}</h3>
                 {generateFormInput(inputDict, rowData)}
                 <SubmitButton buttonClass="button-submit" buttonTitle="submit" onButtonClick={onSubmitClick} />
