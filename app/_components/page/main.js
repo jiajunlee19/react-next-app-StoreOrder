@@ -16,6 +16,12 @@ function Main( {headerTitle, fetchedData, inputDictInsert, inputDictUpdate, prim
     const [updateState, updateUrl] = useFormState(updateAction, initialState);
     const [deleteState, deleteUrl] = useFormState(deleteAction, initialState);
 
+    // Control the loaderTitle with messages
+    const [insertMsg, setInsertMsg] = useState('');
+    const [updateMsg, setUpdateMsg] = useState('');
+    const [deleteMsg, setDeleteMsg] = useState('');
+    const [loaderTitle, setLoaderTitle] = useState('');
+
     // A state that controls whether a form should show, acceptable values: null/insert/update
     const [isShowForm, setIsShowForm] = useState(null);
 
@@ -32,22 +38,27 @@ function Main( {headerTitle, fetchedData, inputDictInsert, inputDictUpdate, prim
     const [rowData, setRowData] = useState(initRowData);
 
     // Configure loader based on state message
-    let loaderClassName = 'loader-hidden';
-    let loaderTitle = '';
-    if (insertState?.message || updateState?.message || deleteState?.message) {
+    let loaderClassName = 'loader-hidden'
+    if (loaderTitle?.length > 0) {
       // show loader
       loaderClassName = 'loader';
+    }
+    else {
+      loaderClassName = 'loader-hidden;'
+    }
 
-      // show latest updated message
-      if (insertState.message && insertState.message !== loaderTitle) {
-        loaderTitle = insertState.message;
-      }
-      else if (updateState.message && updateState.message !== loaderTitle) {
-        loaderTitle = updateState.message;
-      }
-      else if (deleteState.message && deleteState.message !== loaderTitle) {
-        loaderTitle = deleteState.message;
-      }
+    // show latest updated message whenever any new message is received
+    if (insertState?.message && insertState?.message !== insertMsg) {
+      setLoaderTitle(insertState.message);
+      setInsertMsg(insertState.message);
+    }
+    else if (updateState.message && updateState.message !== updateMsg) {
+      setLoaderTitle(updateState.message);
+      setUpdateMsg(updateState.message);
+    }
+    else if (deleteState.message && deleteState.message !== deleteMsg) {
+      setLoaderTitle(deleteState.message);
+      setDeleteMsg(deleteState.message);
     }
 
     return (
