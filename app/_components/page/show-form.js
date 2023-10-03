@@ -41,7 +41,7 @@ function ShowForm( {isShowForm, rowData, inputDictInsert, inputDictUpdate, onSet
             e.preventDefault();
             return;
         };
-        onSetIsShowForm(null); //proceed to submit form
+        // onSetIsShowForm(null); //proceed to submit form
     };
 
     return (
