@@ -1,7 +1,7 @@
 import React from 'react';
-import Loader from '../loader';
-import Table from '../table';
-import FormDelete from '../form-delete';
+import Loader from '@/app/_components/loader';
+import Table from '@/app/_components/table';
+import FormDelete from '@/app/_components/form-delete';
 
 function ShowTable( {loaderClassName, loaderTitle, fetchedData, primaryKey, columnListDisplay, onSetIsShowForm, onSetRowData, deleteState, deleteUrl} ) {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonClick from './button-click';
+import ButtonClick from '@/app/_components/button-click';
 
 function SearchBar( {searchPlaceholderText, searchTextValue, onSearchChange, buttonSearchTitle, onSearchClick} ) {
     return (

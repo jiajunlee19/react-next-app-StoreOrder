@@ -1,6 +1,6 @@
 import React from 'react';
-import ButtonClick from '../button-click';
-import Form from '../form';
+import ButtonClick from '@/app/_components//button-click';
+import Form from '@/app/_components/form';
 
 function ShowForm( {isShowForm, rowData, inputDictInsert, inputDictUpdate, onSetIsShowForm, onSetRowData, insertState, insertUrl, updateState, updateUrl} ) {
 

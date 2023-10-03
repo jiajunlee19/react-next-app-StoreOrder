@@ -1,6 +1,6 @@
-import React, { use } from 'react';
+import React from 'react';
 import { useRef } from 'react';
-import SubmitButton from './button-submit';
+import SubmitButton from '@/app/_components/button-submit';
 
 function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onSubmitClick, onCancelClick, formSubmitState, formSubmitAction} ) {
 

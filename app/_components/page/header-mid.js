@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {useState} from 'react';
-import SearchBar from '../search-bar';
+import SearchBar from '@/app/_components/search-bar';
   
 function HeaderMid() {
 

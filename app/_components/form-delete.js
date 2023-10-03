@@ -1,6 +1,5 @@
 import React from 'react';
-import {experimental_useFormState} from 'react-dom';
-import SubmitButton from '../_components/button-submit';
+import SubmitButton from '@/app/_components/button-submit';
 
 function FormDelete( {deleteState, deleteUrl, primaryKey, primaryID, onDeleteClick} ) {
     return (

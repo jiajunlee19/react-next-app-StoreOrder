@@ -1,8 +1,8 @@
 import React from 'react';
-import HeaderLeft from '../_components/page/header-left';
-import HeaderMid from '../_components/page/header-mid';
-import HeaderRight from '../_components/page/header-right';
-import Main from '../_components/page/main';
+import HeaderLeft from '@/app/_components/page/header-left';
+import HeaderMid from '@/app/_components/page/header-mid';
+import HeaderRight from '@/app/_components/page/header-right';
+import Main from '@/app/_components/page/main';
 import { getMember, insertMember, updateMember, deleteMember } from '@/app/_actions/member';
 
 // Define staticSiteRendering function
