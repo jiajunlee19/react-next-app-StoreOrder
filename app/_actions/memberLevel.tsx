@@ -124,7 +124,7 @@ export async function updateMemberLevel(prevState: any, formData: FormData) {
 
 };
 
-export async function deleteMember(prevState: any, formData: FormData) {
+export async function deleteMemberLevel(prevState: any, formData: FormData) {
 
     // set zod schema to validate form data
     const schema = z.object({
