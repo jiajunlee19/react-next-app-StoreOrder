@@ -5,7 +5,7 @@ function HeaderRight() {
   return (
     <nav className="header-right">
       <ButtonLink buttonTitle={"Manage Member"} buttonLink={"/member"}/>
-      <ButtonLink buttonTitle={"Manage Member Level"} buttonLink={"/member_level"}/>
+      <ButtonLink buttonTitle={"Manage Member Level"} buttonLink={"/memberLevel"}/>
       <ButtonLink buttonTitle={"Manage UOM"} buttonLink={"/uom"}/>
       <ButtonLink buttonTitle={"Manage Product"} buttonLink={"/product"}/>
     </nav>
