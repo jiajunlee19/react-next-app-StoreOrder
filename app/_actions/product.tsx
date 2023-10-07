@@ -6,6 +6,29 @@ import {z} from 'zod';
 import { revalidatePath } from 'next/cache';
 import prisma from '@/prisma/prisma';
 
+export async function getUOM() {
+
+    try {
+
+        // get result from prisma
+        const result = await prisma.uom.findMany({
+            select: {
+                'uom_id': true,
+                'uom_name': true
+            }
+        });
+
+        // Check existing cache, revalidate with the fetched data
+        revalidatePath('/product');
+
+        return result
+
+    } catch(e) {
+        return [];
+    }
+
+};
+
 export async function getProduct() {
 
     try {
