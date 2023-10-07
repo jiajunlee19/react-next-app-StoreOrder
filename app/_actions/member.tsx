@@ -126,7 +126,7 @@ export async function deleteMember(prevState: any, formData: FormData) {
 
     // set zod schema to validate form data
     const schema = z.object({
-        member_id: z.string()
+        member_id: z.string().uuid()
     });
     const data = schema.parse({
         member_id: formData.get('member_id')

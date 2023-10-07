@@ -119,7 +119,7 @@ export async function deleteUOM(prevState: any, formData: FormData) {
 
     // set zod schema to validate form data
     const schema = z.object({
-        uom_id: z.string()
+        uom_id: z.string().uuid()
     });
     const data = schema.parse({
         uom_id: formData.get('uom_id')

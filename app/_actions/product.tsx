@@ -162,7 +162,7 @@ export async function deleteProduct(prevState: any, formData: FormData) {
 
     // set zod schema to validate form data
     const schema = z.object({
-        product_id: z.string()
+        product_id: z.string().uuid()
     });
     const data = schema.parse({
         product_id: formData.get('product_id')

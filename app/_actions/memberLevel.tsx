@@ -128,7 +128,7 @@ export async function deleteMemberLevel(prevState: any, formData: FormData) {
 
     // set zod schema to validate form data
     const schema = z.object({
-        member_level_id: z.string()
+        member_level_id: z.string().uuid()
     });
     const data = schema.parse({
         member_level_id: formData.get('member_level_id')
