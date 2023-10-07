@@ -45,7 +45,7 @@ async function MemberLevel () {
           <HeaderRight />
         </header>
         <main className='main'>
-            <Main headerTitle="Manage Member Level" fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} />
+            <Main headerTitle="Manage Member Level" formTitle="Member Level" fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} selectOptionData={[]} selectPrimaryKey="" selectPrimaryKeyList={[]} />
         </main>
       </React.Fragment>
     );

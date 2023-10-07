@@ -41,7 +41,7 @@ async function UOM () {
           <HeaderRight />
         </header>
         <main className='main'>
-            <Main headerTitle="Manage UOM" fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} />
+            <Main headerTitle="Manage UOM" formTitle="UOM" fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} selectOptionData={[]} selectPrimaryKey="" selectPrimaryKeyList={[]} />
         </main>
       </React.Fragment>
     );
