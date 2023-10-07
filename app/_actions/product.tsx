@@ -34,15 +34,16 @@ export async function getProduct() {
     try {
 
         // get result from prisma
-        const result = await prisma.product.findMany({
-            include: {
-                fk_uom_id: {
-                    select: {
-                        uom_name: true
-                    }
-                }
-            }
-        });
+        const result = await prisma.$queryRaw`SELECT p.*,u.uom_name FROM product p inner join uom u on p.uom_id = u.uom_id`;
+        // const result = await prisma.product.findMany({
+        //     include: {
+        //         fk_uom_id: {
+        //             select: {
+        //                 uom_name: true
+        //             }
+        //         }
+        //     }
+        // });
 
         // Check existing cache, revalidate with the fetched data
         revalidatePath('/product');
