@@ -127,7 +127,7 @@ export const DeleteProductSchema = z.object({
 
 
 // Order
-export const OrderSchema = z.object({
+export const SelectOrderSchema = z.object({
     order_id: z.string().nonempty().uuid(),
     member_id: z.string().nonempty().uuid(),
     member_name: z.string().nonempty(),
