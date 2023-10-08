@@ -45,7 +45,6 @@ async function Product () {
     const selectOptionData = await getUOM();
     const selectPrimaryKey = 'uom_id';
     const selectPrimaryKeyList: string[] = ['uom_name'];
-    // const dropDownColumnList: string[] = ['uom_name'];
 
     return (
       <React.Fragment>

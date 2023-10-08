@@ -37,6 +37,12 @@ async function Member () {
     const updateAction = updateMember;
     const deleteAction = deleteMember;
 
+
+    // fetch data for select options
+    const selectOptionData: any = [];
+    const selectPrimaryKey = '';
+    const selectPrimaryKeyList: string[] = [];
+
     return (
       <React.Fragment>
         <header className='header'>
@@ -45,7 +51,7 @@ async function Member () {
           <HeaderRight />
         </header>
         <main className='main'>
-            <Main headerTitle="Manage Member" formTitle="Member" fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} selectOptionData={[]} selectPrimaryKey="" selectPrimaryKeyList={[]} />
+            <Main headerTitle="Manage Member" formTitle="Member" fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} selectOptionData={selectOptionData} selectPrimaryKey={selectPrimaryKey} selectPrimaryKeyList={selectPrimaryKeyList} />
         </main>
       </React.Fragment>
     );
