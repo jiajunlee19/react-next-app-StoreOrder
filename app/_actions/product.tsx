@@ -1,10 +1,14 @@
 'use server'
 
-import dotenv from 'dotenv';
 import { v5 as uuidv5 } from 'uuid';
 import {z} from 'zod';
 import { revalidatePath } from 'next/cache';
 import prisma from '@/prisma/prisma';
+import { parsedEnv } from '../_libs/zod-env';
+
+const UUID5_NAMESPACE = parsedEnv.UUID5_NAMESPACE;
+const UUID5_SECRET = uuidv5(UUID5_NAMESPACE, uuidv5.DNS)
+const UUID5_DELIMITER = parsedEnv.UUID5_DELIMITER;
 
 export async function getUOM() {
 
@@ -58,12 +62,6 @@ export async function getProduct() {
 
 export async function insertProduct(prevState: any, formData: FormData) {
 
-    // Retrive environment variables
-    dotenv.config({ path: '@/env/.env' });
-    const UUID5_NAMESPACE = process.env.UUID5_NAMESPACE;
-    const UUID5_SECRET = uuidv5(UUID5_NAMESPACE, uuidv5.DNS)
-    const UUID5_DELIMITER = process.env.UUID5_DELIMITER;
-
     // Set current datetime
     const now = new Date();
 
@@ -107,11 +105,6 @@ export async function insertProduct(prevState: any, formData: FormData) {
 };
 
 export async function updateProduct(prevState: any, formData: FormData) {
-
-    // Retrive environment variables
-    dotenv.config({ path: '@/env/.env' });
-    const UUID5_NAMESPACE = process.env.UUID5_NAMESPACE;
-    const UUID5_SECRET = uuidv5(UUID5_NAMESPACE, uuidv5.DNS)
 
     // Set current datetime
     const now = new Date();
