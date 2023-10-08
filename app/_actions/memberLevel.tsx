@@ -21,7 +21,7 @@ export async function getMemberLevel() {
         return result
 
     } catch(e) {
-        return { message: 'Failed to get the items' }
+        return []
     }
 
 };

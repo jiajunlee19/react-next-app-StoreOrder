@@ -51,7 +51,7 @@ export async function getProduct() {
         return result
 
     } catch(e) {
-        return { message: 'Failed to get the items' }
+        return []
     }
 
 };
