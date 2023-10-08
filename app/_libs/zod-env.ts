@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 // Retrive environment variables
 dotenv.config({ path: '@/env/.env' });
 
-const schemaEnv = z.object({
+const EnvSchema = z.object({
     // POSTGRESS connections
     POSTGRES_URL: z.string().nonempty().startsWith('postgres://'),
     POSTGRES_PRISMA_URL: z.string().nonempty().startsWith('postgres://'),
@@ -24,6 +24,6 @@ const schemaEnv = z.object({
     UUID5_DELIMITER: z.string().nonempty(),
 });
 
-export const parsedEnv = schemaEnv.parse(
+export const parsedEnv = EnvSchema.parse(
     process.env
 );
