@@ -5,6 +5,7 @@ import {z} from 'zod';
 import { revalidatePath } from 'next/cache';
 import prisma from '@/prisma/prisma';
 import { parsedEnv } from '../_libs/zod-env';
+import { SelectMemberSchema, InsertMemberSchema, UpdateMemberSchema, DeleteMemberSchema } from '@/app/_libs/zod-form';
 
 const UUID5_NAMESPACE = parsedEnv.UUID5_NAMESPACE;
 const UUID5_SECRET = uuidv5(UUID5_NAMESPACE, uuidv5.DNS)
@@ -19,7 +20,7 @@ export async function getMember() {
 
         });
 
-        // Check existing cache, revalidate with the fetched data
+        // Invalidate existing cache, forcing static site re-rendering
         revalidatePath('/member');
 
         return result
@@ -35,16 +36,7 @@ export async function insertMember(prevState: any, formData: FormData) {
     // Set current datetime
     const now = new Date();
 
-    // set zod schema to validate form data
-    const schema = z.object({
-        member_id: z.string().uuid(),
-        member_name: z.string(),
-        member_password: z.string().uuid(),
-        member_bonus_points: z.coerce.number().nonnegative(),
-        member_created_date: z.date(),
-        member_updated_date: z.date()
-    });
-    const data = schema.parse({
+    const parsedForm = InsertMemberSchema.safeParse({
         member_id: uuidv5(formData.get('member_name'), UUID5_SECRET),
         member_name: formData.get('member_name'),
         member_password: uuidv5(formData.get('member_password'), UUID5_SECRET),
@@ -53,18 +45,22 @@ export async function insertMember(prevState: any, formData: FormData) {
         member_updated_date: now
     });
 
+    if (!parsedForm.success) {
+        return { message: parsedForm.error.toString()};
+    };
+
     try {
 
         // get result from prisma
         const result = await prisma.member.create({
-            data: data,
+            data: parsedForm.data,
         });
 
-        // Check existing cache, revalidate with the fetched data
+        // Invalidate existing cache, forcing static site re-rendering
         revalidatePath('/member');
 
 
-        return { message: `Successfully inserted ${data['member_id']}` }
+        return { message: `Successfully inserted ${parsedForm.data['member_id']}` }
 
     } catch(e) {
         return { message: 'Failed to insert the item' }
@@ -77,15 +73,7 @@ export async function updateMember(prevState: any, formData: FormData) {
     // Set current datetime
     const now = new Date();
 
-    // set zod schema to validate form data
-    const schema = z.object({
-        member_id: z.string().uuid(),
-        member_name: z.string(),
-        member_password: z.string().uuid(),
-        member_bonus_points: z.coerce.number().nonnegative(),
-        member_updated_date: z.date()
-    });
-    const data = schema.parse({
+    const parsedForm = UpdateMemberSchema.safeParse({
         member_id: formData.get('member_id'),
         member_name: formData.get('member_name'),
         member_password: uuidv5(formData.get('member_password'), UUID5_SECRET),
@@ -93,22 +81,26 @@ export async function updateMember(prevState: any, formData: FormData) {
         member_updated_date: now
     });
 
+    if (!parsedForm.success) {
+        return { message: parsedForm.error.toString()};
+    };
+
     try {
 
         // get result from prisma
         const result = await prisma.member.update({
             where: {
-                member_id: data['member_id']
+                member_id: parsedForm.data['member_id']
             },
 
-            data: data,
+            data: parsedForm.data,
         });
 
-        // Check existing cache, revalidate with the fetched data
+        // Invalidate existing cache, forcing static site re-rendering
         revalidatePath('/member');
 
 
-        return { message: `Successfully updated ${data['member_id']}` }
+        return { message: `Successfully updated ${parsedForm.data['member_id']}` }
 
     } catch(e) {
         return { message: 'Failed to update the item' }
@@ -118,27 +110,27 @@ export async function updateMember(prevState: any, formData: FormData) {
 
 export async function deleteMember(prevState: any, formData: FormData) {
 
-    // set zod schema to validate form data
-    const schema = z.object({
-        member_id: z.string().uuid()
-    });
-    const data = schema.parse({
+    const parsedForm = DeleteMemberSchema.safeParse({
         member_id: formData.get('member_id')
     });
+
+    if (!parsedForm.success) {
+        return { message: parsedForm.error.toString()};
+    };
 
     try {
 
         // get result from prisma
         const result = await prisma.member.delete({
             where: {
-                member_id: data['member_id']
+                member_id: parsedForm.data['member_id']
             },
         });
 
-        // Check existing cache, revalidate with the fetched data
+        // Invalidate existing cache, forcing static site re-rendering
         revalidatePath('/member');
 
-        return { message: `Successfully deleted ${data['member_id']}` }
+        return { message: `Successfully deleted ${parsedForm.data['member_id']}` }
 
     } catch(e) {
         return { message: 'Failed to delete the item' }
