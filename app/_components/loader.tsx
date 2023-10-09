@@ -1,6 +1,11 @@
 import React from 'react';
 
-function Loader( {loaderClassName, loaderTitle} ) {
+type LoaderProps = {
+    loaderClassName: string,
+    loaderTitle: string,
+};
+
+function Loader( {loaderClassName, loaderTitle}: LoaderProps ): React.JSX.Element {
     return (
         <div role="status" className={loaderClassName}>
             <span>{loaderTitle}</span>

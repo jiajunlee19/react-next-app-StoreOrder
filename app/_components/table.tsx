@@ -1,6 +1,11 @@
 import React from 'react';
 
-function Table( {tableHead, tableBody} ) {
+type TableProps = {
+    tableHead: React.JSX.Element,
+    tableBody: React.JSX.Element,
+};
+
+function Table( {tableHead, tableBody}: TableProps ): React.JSX.Element {
     return (
         <table>
             <thead>

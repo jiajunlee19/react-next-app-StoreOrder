@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonClick from '@/app/_components//button-click';
+import ButtonClick from '@/app/_components/button-click';
 import Form from '@/app/_components/form';
 import { createNestedObject, accessNestedObject } from '@/app/_actions/utils';
 

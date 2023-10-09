@@ -2,16 +2,38 @@ import React from 'react';
 import { useRef } from 'react';
 import SubmitButton from '@/app/_components/button-submit';
 
-function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onDynamicChange, onSubmitClick, onCancelClick, formSubmitState, formSubmitAction, selectOptionData} ) {
+type TInputDict = {
+    [key: string]: string,
+};
+
+type TRowData = {
+    [key: string]: any,
+};
+
+type FormProps = {
+    formClassName: string, 
+    formTitle: string, 
+    inputDict: TInputDict,
+    rowData: TRowData,
+    onInputChange: React.ChangeEventHandler, 
+    onDynamicChange: React.ChangeEventHandler, 
+    onSubmitClick: React.MouseEventHandler, 
+    onCancelClick: React.MouseEventHandler, 
+    formSubmitAction: (formData: FormData) => Promise<void>, 
+    selectOptionData: TRowData[],
+};
+
+function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onDynamicChange, onSubmitClick, onCancelClick, 
+                formSubmitAction, selectOptionData}: FormProps ): React.JSX.Element {
 
     // declare formRef, we can perform form-related action based on this later
-    const formRef = useRef(null);
+    const formRef = useRef<HTMLFormElement>(null);
 
     // Generate select options
-    function generateSelectOption(key, selectOptionData) {
+    function generateSelectOption(key: string, selectOptionData: TRowData[]): React.JSX.Element[] {
 
         // map each row into select option
-        const selectOption = selectOptionData.map(row => {
+        const selectOption = selectOptionData.map((row) => {
 
             return (
                 <option key={row[key]} value={row[key]}>{row[key]}</option>
@@ -22,7 +44,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
     };
 
     // Generate form inputs
-    function generateFormInput(inputDict, rowData, selectOptionData) {
+    function generateFormInput(inputDict: TInputDict, rowData: TRowData, selectOptionData: TRowData[]) {
 
         // Development: Write handling method for these special input value types
         // const inputDict = {
@@ -57,7 +79,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
                     <React.Fragment key={key}>
                         <label className="label" htmlFor={key}>{key}: </label>
                         <select name={key} className="input" onChange={onDynamicChange} required>
-                            <option value={null}></option>
+                            <option value=""></option>
                             {generateSelectOption(key, selectOptionData)}
                         </select>
                     </React.Fragment>
@@ -99,7 +121,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
 
     return (
         <div className={formClassName}>
-            <form ref={formRef} className="form-container" action={ async (formData) => {
+            <form ref={formRef} className="form-container" action={ async (formData: FormData): Promise<void> => {
                     await formSubmitAction(formData);
                     formRef.current?.reset();
                 }

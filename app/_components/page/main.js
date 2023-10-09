@@ -3,8 +3,8 @@
 import React from 'react';
 import {useState} from 'react';
 import H2 from '@/app/_components/h2';
-import ShowForm from '@/app/_components//page/show-form';
-import ShowTable from '@/app/_components//page/show-table';
+import ShowForm from '@/app/_components/page/show-form';
+import ShowTable from '@/app/_components/page/show-table';
 import { experimental_useFormState as useFormState } from 'react-dom';
 
 // a client component with useState
