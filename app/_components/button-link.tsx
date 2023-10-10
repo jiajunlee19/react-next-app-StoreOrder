@@ -1,10 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import { Url } from 'url';
 
 type ButtonLinkProps = {
   buttonTitle: string,
-  buttonLink: Url,
+  buttonLink: string,
 };
 
 function ButtonLink( {buttonTitle, buttonLink}: ButtonLinkProps ): React.JSX.Element {
