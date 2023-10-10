@@ -19,7 +19,7 @@ type FormProps = {
     onDynamicChange: React.ChangeEventHandler, 
     onSubmitClick: React.MouseEventHandler, 
     onCancelClick: React.MouseEventHandler, 
-    formSubmitAction: (formData: FormData) => Promise<void>, 
+    formSubmitAction: (prevState: any, formData: FormData) => Promise<{messages: string}>, 
     selectOptionData: TRowData[],
 };
 
@@ -122,7 +122,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
     return (
         <div className={formClassName}>
             <form ref={formRef} className="form-container" action={ async (formData: FormData): Promise<void> => {
-                    await formSubmitAction(formData);
+                    await formSubmitAction({messages: ''} ,formData);
                     formRef.current?.reset();
                 }
             }>

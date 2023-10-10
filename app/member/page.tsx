@@ -39,8 +39,8 @@ async function Member () {
 
 
     // fetch data for select options
-    const selectOptionData: any = [];
-    const selectPrimaryKey = '';
+    const selectOptionData: {[key: string]: any}[] = [];
+    const selectPrimaryKey: string = '';
     const selectPrimaryKeyList: string[] = [];
 
     return (

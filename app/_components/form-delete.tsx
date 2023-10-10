@@ -2,7 +2,7 @@ import React from 'react';
 import SubmitButton from '@/app/_components/button-submit';
 
 type FormDeleteProps = {
-    deleteUrl: (formData: FormData) => Promise<void>, 
+    deleteUrl: (formData: FormData) => Promise<{messages: string}>, 
     primaryKey: string, 
     primaryID: string, 
     onDeleteClick: React.MouseEventHandler,

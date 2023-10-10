@@ -7,8 +7,25 @@ import ShowForm from '@/app/_components/page/show-form';
 import ShowTable from '@/app/_components/page/show-table';
 import { experimental_useFormState as useFormState } from 'react-dom';
 
+type MainProps = {
+  headerTitle: string, 
+  formTitle: string, 
+  fetchedData: {[key: string]: any}[], 
+  inputDictInsert: {[key: string]: string}, 
+  inputDictUpdate: {[key: string]: string}, 
+  primaryKey: string, 
+  columnListDisplay: string[], 
+  insertAction: (prevState: any, formData: FormData) => Promise<{messages: string}>, 
+  updateAction: (prevState: any, formData: FormData) => Promise<{messages: string}>,
+  deleteAction: (prevState: any, formData: FormData) => Promise<{messages: string}>,
+  selectOptionData: {[key: string]: any}[], 
+  selectPrimaryKey: string, 
+  selectPrimaryKeyList: string[],
+};
+
 // a client component with useState
-function Main( {headerTitle, formTitle, fetchedData, inputDictInsert, inputDictUpdate, primaryKey, columnListDisplay, insertAction, updateAction, deleteAction, selectOptionData, selectPrimaryKey, selectPrimaryKeyList} ) {
+function Main( {headerTitle, formTitle, fetchedData, inputDictInsert, inputDictUpdate, primaryKey, columnListDisplay, 
+                insertAction, updateAction, deleteAction, selectOptionData, selectPrimaryKey, selectPrimaryKeyList}: MainProps ) {
 
     // Control form
     const initialState = { message: null }
@@ -23,7 +40,7 @@ function Main( {headerTitle, formTitle, fetchedData, inputDictInsert, inputDictU
     const [loaderTitle, setLoaderTitle] = useState('');
 
     // A state that controls whether a form should show, acceptable values: null/insert/update
-    const [isShowForm, setIsShowForm] = useState(null);
+    const [isShowForm, setIsShowForm] = useState<string | null>(null);
 
     // Init rowData column keys accordingly for insert/update
     let initRowData = fetchedData[0];
@@ -64,8 +81,8 @@ function Main( {headerTitle, formTitle, fetchedData, inputDictInsert, inputDictU
     return (
       <React.Fragment>
         <H2 headerTitle={headerTitle} /> 
-        <ShowForm isShowForm={isShowForm} formTitle={formTitle} rowData={rowData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} onSetIsShowForm={(action) => setIsShowForm(action)} onSetRowData={(d) => setRowData(d)} insertState={insertState} insertUrl={insertUrl} updateState={updateState} updateUrl={updateUrl} selectOptionData={selectOptionData} selectPrimaryKey={selectPrimaryKey} selectPrimaryKeyList={selectPrimaryKeyList} />
-        <ShowTable loaderClassName={loaderClassName} loaderTitle={loaderTitle} fetchedData={fetchedData} primaryKey={primaryKey} columnListDisplay={columnListDisplay} onSetIsShowForm={(action) => setIsShowForm(action)} onSetRowData={(d) => setRowData(d)} deleteState={deleteState} deleteUrl={deleteUrl} selectOptionData={selectOptionData} selectPrimaryKey={selectPrimaryKey} selectPrimaryKeyList={selectPrimaryKeyList} />
+        <ShowForm isShowForm={isShowForm} formTitle={formTitle} rowData={rowData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} onSetIsShowForm={(action) => setIsShowForm(action)} onSetRowData={(d) => setRowData(d)} insertUrl={insertUrl} updateUrl={updateUrl} selectOptionData={selectOptionData} selectPrimaryKey={selectPrimaryKey} selectPrimaryKeyList={selectPrimaryKeyList} />
+        <ShowTable loaderClassName={loaderClassName} loaderTitle={loaderTitle} fetchedData={fetchedData} primaryKey={primaryKey} columnListDisplay={columnListDisplay} onSetIsShowForm={(action) => setIsShowForm(action)} onSetRowData={(d) => setRowData(d)} deleteUrl={deleteUrl} />
       </React.Fragment>
     );
   };

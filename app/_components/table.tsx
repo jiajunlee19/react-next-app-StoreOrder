@@ -2,7 +2,7 @@ import React from 'react';
 
 type TableProps = {
     tableHead: React.JSX.Element,
-    tableBody: React.JSX.Element,
+    tableBody: React.JSX.Element[],
 };
 
 function Table( {tableHead, tableBody}: TableProps ): React.JSX.Element {

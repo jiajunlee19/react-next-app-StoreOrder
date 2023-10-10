@@ -3,9 +3,25 @@ import Loader from '@/app/_components/loader';
 import Table from '@/app/_components/table';
 import FormDelete from '@/app/_components/form-delete';
 
-function ShowTable( {loaderClassName, loaderTitle, fetchedData, primaryKey, columnListDisplay, onSetIsShowForm, onSetRowData, deleteState, deleteUrl} ) {
+type TRowData = {
+    [key: string]: any,
+}
 
-    function handleUpdateClick(e, d) {
+type ShowTableProps = {
+    loaderClassName: string, 
+    loaderTitle: string, 
+    fetchedData: TRowData[], 
+    primaryKey: string, 
+    columnListDisplay: string[], 
+    onSetIsShowForm: React.Dispatch<React.SetStateAction<string | null>>, 
+    onSetRowData: React.Dispatch<React.SetStateAction<TRowData>>, 
+    deleteUrl: (formData: FormData) => Promise<{messages: string}>,
+};
+
+function ShowTable( {loaderClassName, loaderTitle, fetchedData, primaryKey, columnListDisplay, 
+                    onSetIsShowForm, onSetRowData, deleteUrl}: ShowTableProps ): React.JSX.Element {
+
+    const handleUpdateClick = (d: TRowData) => (e: React.MouseEvent<HTMLButtonElement>) => {
         // setRowData({
         //     'member_id': 'id1',
         //     'member_name': 'jiajunlee',
@@ -20,7 +36,7 @@ function ShowTable( {loaderClassName, loaderTitle, fetchedData, primaryKey, colu
     };
 
 
-    function handleDeleteClick(e) {
+    const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 
         const confirmMsg = 'Are you sure to delete this item?'
 
@@ -66,8 +82,8 @@ function ShowTable( {loaderClassName, loaderTitle, fetchedData, primaryKey, colu
             <tr key={fetchedData[i][primaryKey]}>
                 {tableData}
                 <td>
-                    <button onClick={(e) => handleUpdateClick(e, fetchedData[i])}>update</button><br/>
-                    <FormDelete deleteState={deleteState} deleteUrl={deleteUrl} primaryKey={primaryKey} primaryID={fetchedData[i][primaryKey]} onDeleteClick={(e) => handleDeleteClick(e)} />
+                    <button onClick={handleUpdateClick(fetchedData[i])}>update</button><br/>
+                    <FormDelete deleteUrl={deleteUrl} primaryKey={primaryKey} primaryID={fetchedData[i][primaryKey]} onDeleteClick={handleDeleteClick} />
                 </td>
             </tr>
         );
