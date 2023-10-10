@@ -1,15 +1,16 @@
-import { list } from 'postcss';
-import React from 'react';
+type NestedObject = {
+    [key: string]: NestedObject
+};
 
 // create nested object
 // data['product_name']['uom_name'] = '?'
-export function createNestedObject( base, names, value ) {
+export function createNestedObject( base: NestedObject, names: string[], value: {[key: string]: any}) {
     // If a value is given, remove the last name and keep it for later:
-    var lastName = arguments.length === 3 ? names.pop() : false;
+    let lastName = arguments.length === 3 ? names.pop() : false;
 
     // Walk the hierarchy, creating new objects where needed.
     // If the lastName was removed, then the last object is not set yet:
-    for( var i = 0; i < names.length; i++ ) {
+    for( let i = 0; i < names.length; i++ ) {
         base = base[ names[i] ] = base[ names[i] ] || {};
     }
 
@@ -23,7 +24,7 @@ export function createNestedObject( base, names, value ) {
 
 // access nested object
 // string = data['product_name']['uom_name']
-export function accessNestedObject( base, names) {
+export function accessNestedObject( base: NestedObject, names: string[]) {
 
     // Walk the hierarchy
     for( let i = 0; i < names.length; i++ ) {
