@@ -4,6 +4,7 @@ import HeaderMid from '@/app/_components/page/header-mid';
 import HeaderRight from '@/app/_components/page/header-right';
 import Main from '@/app/_components/page/main';
 import { getMember, getOrder, insertOrder, updateOrder, deleteOrder } from '@/app/_actions/order';
+import ToasterContainer from './_components/toaster-container';
 
 // Define staticSiteRendering function
 async function Order () {
@@ -54,6 +55,7 @@ async function Order () {
         <main className='main'>
             <Main headerTitle="Manage Order" formTitle="Order" fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} selectOptionData={selectOptionData} selectPrimaryKey={selectPrimaryKey} selectPrimaryKeyList={selectPrimaryKeyList} />
         </main>
+        <ToasterContainer />
       </React.Fragment>
     );
   };

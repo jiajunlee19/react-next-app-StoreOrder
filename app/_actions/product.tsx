@@ -1,7 +1,6 @@
 'use server'
 
 import { v5 as uuidv5 } from 'uuid';
-import {z} from 'zod';
 import { revalidatePath } from 'next/cache';
 import prisma from '@/prisma/prisma';
 import { parsedEnv } from '../_libs/zod-env';
@@ -50,10 +49,18 @@ export async function getProduct() {
         //     }
         // });
 
+        const parsedForm = SelectProductSchema.safeParse({
+            result
+        });
+
+        if (!parsedForm.success) {
+            return []
+        };
+
         // Invalidate existing cache, forcing static site re-rendering
         revalidatePath('/product');
 
-        return result
+        return parsedForm.data
 
     } catch(e) {
         return []
@@ -61,7 +68,7 @@ export async function getProduct() {
 
 };
 
-export async function insertProduct(prevState: any, formData: FormData) {
+export async function insertProduct(formData: FormData) {
 
     // Set current datetime
     const now = new Date();
@@ -77,7 +84,7 @@ export async function insertProduct(prevState: any, formData: FormData) {
     });
     
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { error: parsedForm.error.toString()};
     };
 
     try {
@@ -91,15 +98,15 @@ export async function insertProduct(prevState: any, formData: FormData) {
         revalidatePath('/product');
 
 
-        return { message: `Successfully inserted ${parsedForm.data['product_id']}` }
+        return { success: `Successfully inserted ${parsedForm.data['product_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to insert the item' }
+        return { error: 'Failed to insert the item' }
     }
 
 };
 
-export async function updateProduct(prevState: any, formData: FormData) {
+export async function updateProduct(formData: FormData) {
 
     // Set current datetime
     const now = new Date();
@@ -114,7 +121,7 @@ export async function updateProduct(prevState: any, formData: FormData) {
     });
     
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { error: parsedForm.error.toString()};
     };
 
     try {
@@ -132,22 +139,22 @@ export async function updateProduct(prevState: any, formData: FormData) {
         revalidatePath('/product');
 
 
-        return { message: `Successfully updated ${parsedForm.data['product_id']}` }
+        return { success: `Successfully updated ${parsedForm.data['product_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to update the item' }
+        return { error: 'Failed to update the item' }
     }
 
 };
 
-export async function deleteProduct(prevState: any, formData: FormData) {
+export async function deleteProduct(formData: FormData) {
 
     const parsedForm = DeleteProductSchema.safeParse({
         product_id: formData.get('product_id')
     });
     
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { error: parsedForm.error.toString()};
     };
 
     try {
@@ -162,10 +169,10 @@ export async function deleteProduct(prevState: any, formData: FormData) {
         // Invalidate existing cache, forcing static site re-rendering
         revalidatePath('/product');
 
-        return { message: `Successfully deleted ${parsedForm.data['product_id']}` }
+        return { success: `Successfully deleted ${parsedForm.data['product_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to delete the item' }
+        return { error: 'Failed to delete the item' }
     }
 
 };

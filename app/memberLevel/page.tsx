@@ -4,6 +4,7 @@ import HeaderMid from '@/app/_components/page/header-mid';
 import HeaderRight from '@/app/_components/page/header-right';
 import Main from '@/app/_components/page/main';
 import { getMemberLevel, insertMemberLevel, updateMemberLevel, deleteMemberLevel } from '@/app/_actions/memberLevel';
+import ToasterContainer from '../_components/toaster-container';
 
 // Define staticSiteRendering function
 async function MemberLevel () {
@@ -53,6 +54,7 @@ async function MemberLevel () {
         <main className='main'>
             <Main headerTitle="Manage Member Level" formTitle="Member Level" fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} selectOptionData={selectOptionData} selectPrimaryKey={selectPrimaryKey} selectPrimaryKeyList={selectPrimaryKeyList} />
         </main>
+        <ToasterContainer />
       </React.Fragment>
     );
   };

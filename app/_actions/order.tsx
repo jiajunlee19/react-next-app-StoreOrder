@@ -44,14 +44,19 @@ export async function getOrder() {
             FROM "order" o 
             inner join member m on o.member_id = m.member_id
         `;
-        // const result = await prisma.order.findMany({
+        
+        const parsedForm = SelectOrderSchema.safeParse({
+            result
+        });
 
-        // });
+        if (!parsedForm.success) {
+            return []
+        }
 
         // Invalidate existing cache, forcing static site re-rendering
         revalidatePath('/');
 
-        return result
+        return parsedForm.data
 
     } catch(e) {
         return []
@@ -59,7 +64,7 @@ export async function getOrder() {
 
 };
 
-export async function insertOrder(prevState: any, formData: FormData) {
+export async function insertOrder(formData: FormData) {
 
     // Set current datetime
     const now = new Date();
@@ -72,7 +77,7 @@ export async function insertOrder(prevState: any, formData: FormData) {
     });
     
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { error: parsedForm.error.toString()};
     };
 
     try {
@@ -86,15 +91,15 @@ export async function insertOrder(prevState: any, formData: FormData) {
         revalidatePath('/');
 
 
-        return { message: `Successfully inserted ${parsedForm.data['order_id']}` }
+        return { success: `Successfully inserted ${parsedForm.data['order_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to insert the item' }
+        return { error: 'Failed to insert the item' }
     }
 
 };
 
-export async function updateOrder(prevState: any, formData: FormData) {
+export async function updateOrder(formData: FormData) {
 
     // Set current datetime
     const now = new Date();
@@ -106,7 +111,7 @@ export async function updateOrder(prevState: any, formData: FormData) {
     });
     
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { error: parsedForm.error.toString()};
     };
 
     try {
@@ -124,22 +129,22 @@ export async function updateOrder(prevState: any, formData: FormData) {
         revalidatePath('/');
 
 
-        return { message: `Successfully updated ${parsedForm.data['order_id']}` }
+        return { success: `Successfully updated ${parsedForm.data['order_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to update the item' }
+        return { error: 'Failed to update the item' }
     }
 
 };
 
-export async function deleteOrder(prevState: any, formData: FormData) {
+export async function deleteOrder(formData: FormData) {
 
     const parsedForm = DeleteOrderSchema.safeParse({
         order_id: formData.get('order_id')
     });
     
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { error: parsedForm.error.toString()};
     };
 
     try {
@@ -154,10 +159,10 @@ export async function deleteOrder(prevState: any, formData: FormData) {
         // Invalidate existing cache, forcing static site re-rendering
         revalidatePath('/');
 
-        return { message: `Successfully deleted ${parsedForm.data['order_id']}` }
+        return { success: `Successfully deleted ${parsedForm.data['order_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to delete the item' }
+        return { error: 'Failed to delete the item' }
     }
 
 };

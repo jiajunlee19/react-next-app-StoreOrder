@@ -1,7 +1,6 @@
 'use server'
 
 import { v5 as uuidv5 } from 'uuid';
-import {z} from 'zod';
 import { revalidatePath } from 'next/cache';
 import prisma from '@/prisma/prisma';
 import { parsedEnv } from '../_libs/zod-env';
@@ -31,7 +30,7 @@ export async function getUOM() {
 
 };
 
-export async function insertUOM(prevState: any, formData: FormData) {
+export async function insertUOM(formData: FormData) {
 
     // Set current datetime
     const now = new Date();
@@ -44,7 +43,7 @@ export async function insertUOM(prevState: any, formData: FormData) {
     });
 
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { error: parsedForm.error.toString()};
     };
 
     try {
@@ -58,15 +57,15 @@ export async function insertUOM(prevState: any, formData: FormData) {
         revalidatePath('/uom');
 
 
-        return { message: `Successfully inserted ${parsedForm.data['uom_id']}` }
+        return { success: `Successfully inserted ${parsedForm.data['uom_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to insert the item' }
+        return { error: 'Failed to insert the item' }
     }
 
 };
 
-export async function updateUOM(prevState: any, formData: FormData) {
+export async function updateUOM(formData: FormData) {
 
     // Set current datetime
     const now = new Date();
@@ -78,7 +77,7 @@ export async function updateUOM(prevState: any, formData: FormData) {
     });
 
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { error: parsedForm.error.toString()};
     };
 
     try {
@@ -96,22 +95,22 @@ export async function updateUOM(prevState: any, formData: FormData) {
         revalidatePath('/uom');
 
 
-        return { message: `Successfully updated ${parsedForm.data['uom_id']}` }
+        return { success: `Successfully updated ${parsedForm.data['uom_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to update the item' }
+        return { error: 'Failed to update the item' }
     }
 
 };
 
-export async function deleteUOM(prevState: any, formData: FormData) {
+export async function deleteUOM(formData: FormData) {
 
     const parsedForm = DeleteUomSchema.safeParse({
         uom_id: formData.get('uom_id')
     });
     
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { success: parsedForm.error.toString()};
     };
 
     try {
@@ -126,10 +125,10 @@ export async function deleteUOM(prevState: any, formData: FormData) {
         // Invalidate existing cache, forcing static site re-rendering
         revalidatePath('/uom');
 
-        return { message: `Successfully deleted ${parsedForm.data['uom_id']}` }
+        return { error: `Successfully deleted ${parsedForm.data['uom_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to delete the item' }
+        return { error: 'Failed to delete the item' }
     }
 
 };

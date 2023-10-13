@@ -4,6 +4,7 @@ import HeaderMid from '@/app/_components/page/header-mid';
 import HeaderRight from '@/app/_components/page/header-right';
 import Main from '@/app/_components/page/main';
 import { getUOM, getProduct, insertProduct, updateProduct, deleteProduct } from '@/app/_actions/product';
+import ToasterContainer from '../_components/toaster-container';
 
 // Define staticSiteRendering function
 async function Product () {
@@ -56,6 +57,7 @@ async function Product () {
         <main className='main'>
             <Main headerTitle="Manage Product" formTitle="Product" fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} selectOptionData={selectOptionData} selectPrimaryKey={selectPrimaryKey} selectPrimaryKeyList={selectPrimaryKeyList} />
         </main>
+        <ToasterContainer />
       </React.Fragment>
     );
   };

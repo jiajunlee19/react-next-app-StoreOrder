@@ -4,6 +4,7 @@ import HeaderMid from '@/app/_components/page/header-mid';
 import HeaderRight from '@/app/_components/page/header-right';
 import Main from '@/app/_components/page/main';
 import { getUOM, insertUOM, updateUOM, deleteUOM } from '@/app/_actions/uom';
+import ToasterContainer from '../_components/toaster-container';
 
 // Define staticSiteRendering function
 async function UOM () {
@@ -49,6 +50,7 @@ async function UOM () {
         <main className='main'>
             <Main headerTitle="Manage UOM" formTitle="UOM" fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} selectOptionData={selectOptionData} selectPrimaryKey={selectPrimaryKey} selectPrimaryKeyList={selectPrimaryKeyList} />
         </main>
+        <ToasterContainer />
       </React.Fragment>
     );
   };

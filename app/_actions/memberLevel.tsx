@@ -31,7 +31,7 @@ export async function getMemberLevel() {
 
 };
 
-export async function insertMemberLevel(prevState: any, formData: FormData) {
+export async function insertMemberLevel(formData: FormData) {
 
     // Set current datetime
     const now = new Date();
@@ -46,7 +46,7 @@ export async function insertMemberLevel(prevState: any, formData: FormData) {
     });
 
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { error: parsedForm.error.toString()};
     };
 
     try {
@@ -60,15 +60,15 @@ export async function insertMemberLevel(prevState: any, formData: FormData) {
         revalidatePath('/memberLevel');
 
 
-        return { message: `Successfully inserted ${parsedForm.data['member_level_id']}` }
+        return { success: `Successfully inserted ${parsedForm.data['member_level_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to insert the item' }
+        return { error: 'Failed to insert the item' }
     }
 
 };
 
-export async function updateMemberLevel(prevState: any, formData: FormData) {
+export async function updateMemberLevel(formData: FormData) {
 
     // Set current datetime
     const now = new Date();
@@ -83,7 +83,7 @@ export async function updateMemberLevel(prevState: any, formData: FormData) {
     });
 
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { error: parsedForm.error.toString()};
     };
 
     try {
@@ -101,22 +101,22 @@ export async function updateMemberLevel(prevState: any, formData: FormData) {
         revalidatePath('/memberLevel');
 
 
-        return { message: `Successfully updated ${parsedForm.data['member_level_id']}` }
+        return { success: `Successfully updated ${parsedForm.data['member_level_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to update the item' }
+        return { error: 'Failed to update the item' }
     }
 
 };
 
-export async function deleteMemberLevel(prevState: any, formData: FormData) {
+export async function deleteMemberLevel(formData: FormData) {
 
     const parsedForm = DeleteMemberLevelSchema.safeParse({
         member_level_id: formData.get('member_level_id')
     });
 
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { error: parsedForm.error.toString()};
     };
 
     try {
@@ -131,10 +131,10 @@ export async function deleteMemberLevel(prevState: any, formData: FormData) {
         // Invalidate existing cache, forcing static site re-rendering
         revalidatePath('/memberLevel');
 
-        return { message: `Successfully deleted ${parsedForm.data['member_level_id']}` }
+        return { success: `Successfully deleted ${parsedForm.data['member_level_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to delete the item' }
+        return { error: 'Failed to delete the item' }
     }
 
 };
