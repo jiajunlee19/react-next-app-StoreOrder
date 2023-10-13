@@ -5,8 +5,6 @@ import HeaderRight from '@/app/_components/page/header-right';
 import Main from '@/app/_components/page/main';
 import { getMember, insertMember, updateMember, deleteMember } from '@/app/_actions/member';
 import ToasterContainer from '../_components/toaster-container';
-import toast from 'react-hot-toast';
-import { object } from 'zod';
 
 // Define staticSiteRendering function
 async function Member () {
