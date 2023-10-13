@@ -1,7 +1,6 @@
 'use server'
 
 import { v5 as uuidv5 } from 'uuid';
-import {z} from 'zod';
 import { revalidatePath } from 'next/cache';
 import prisma from '@/prisma/prisma';
 import { parsedEnv } from '../_libs/zod-env';
@@ -31,7 +30,7 @@ export async function getMember() {
 
 };
 
-export async function insertMember(prevState: any, formData: FormData) {
+export async function insertMember(formData: FormData) {
 
     // Set current datetime
     const now = new Date();
@@ -46,7 +45,7 @@ export async function insertMember(prevState: any, formData: FormData) {
     });
 
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { error: parsedForm.error.message};
     };
 
     try {
@@ -60,15 +59,15 @@ export async function insertMember(prevState: any, formData: FormData) {
         revalidatePath('/member');
 
 
-        return { message: `Successfully inserted ${parsedForm.data['member_id']}` }
+        return { success: `Successfully inserted ${parsedForm.data['member_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to insert the item' }
+        return { error: 'Failed to insert the item' }
     }
 
 };
 
-export async function updateMember(prevState: any, formData: FormData) {
+export async function updateMember(formData: FormData) {
 
     // Set current datetime
     const now = new Date();
@@ -82,7 +81,7 @@ export async function updateMember(prevState: any, formData: FormData) {
     });
 
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { error: parsedForm.error.message};
     };
 
     try {
@@ -100,22 +99,22 @@ export async function updateMember(prevState: any, formData: FormData) {
         revalidatePath('/member');
 
 
-        return { message: `Successfully updated ${parsedForm.data['member_id']}` }
+        return { success: `Successfully updated ${parsedForm.data['member_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to update the item' }
+        return { error: 'Failed to update the item' }
     }
 
 };
 
-export async function deleteMember(prevState: any, formData: FormData) {
+export async function deleteMember(formData: FormData) {
 
     const parsedForm = DeleteMemberSchema.safeParse({
         member_id: formData.get('member_id')
     });
 
     if (!parsedForm.success) {
-        return { message: parsedForm.error.toString()};
+        return { error: parsedForm.error.message};
     };
 
     try {
@@ -130,10 +129,10 @@ export async function deleteMember(prevState: any, formData: FormData) {
         // Invalidate existing cache, forcing static site re-rendering
         revalidatePath('/member');
 
-        return { message: `Successfully deleted ${parsedForm.data['member_id']}` }
+        return { success: `Successfully deleted ${parsedForm.data['member_id']}` }
 
     } catch(e) {
-        return { message: 'Failed to delete the item' }
+        return { error: 'Failed to delete the item' }
     }
 
 };

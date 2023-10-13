@@ -8,18 +8,16 @@ type TRowData = {
 }
 
 type ShowTableProps = {
-    loaderClassName: string, 
-    loaderTitle: string, 
     fetchedData: TRowData[], 
     primaryKey: string, 
     columnListDisplay: string[], 
     onSetIsShowForm: React.Dispatch<React.SetStateAction<string | null>>, 
     onSetRowData: React.Dispatch<React.SetStateAction<TRowData>>, 
-    deleteUrl: (formData: FormData) => Promise<{messages: string}>,
+    deleteAction: (formData: FormData) => Promise<{success?: string, error?: string}>,
 };
 
-function ShowTable( {loaderClassName, loaderTitle, fetchedData, primaryKey, columnListDisplay, 
-                    onSetIsShowForm, onSetRowData, deleteUrl}: ShowTableProps ): React.JSX.Element {
+function ShowTable( {fetchedData, primaryKey, columnListDisplay, 
+                    onSetIsShowForm, onSetRowData, deleteAction}: ShowTableProps ): React.JSX.Element {
 
     const handleUpdateClick = (d: TRowData) => (e: React.MouseEvent<HTMLButtonElement>) => {
         // setRowData({
@@ -83,7 +81,7 @@ function ShowTable( {loaderClassName, loaderTitle, fetchedData, primaryKey, colu
                 {tableData}
                 <td>
                     <button onClick={handleUpdateClick(fetchedData[i])}>update</button><br/>
-                    <FormDelete deleteUrl={deleteUrl} primaryKey={primaryKey} primaryID={fetchedData[i][primaryKey]} onDeleteClick={handleDeleteClick} />
+                    <FormDelete formSubmitAction={deleteAction} primaryKey={primaryKey} primaryID={fetchedData[i][primaryKey]} onDeleteClick={handleDeleteClick} />
                 </td>
             </tr>
         );
@@ -92,7 +90,6 @@ function ShowTable( {loaderClassName, loaderTitle, fetchedData, primaryKey, colu
 
     return (
         <React.Fragment>
-            <Loader loaderClassName={loaderClassName} loaderTitle={loaderTitle} />
             <Table tableHead={tableHead} tableBody={tableBody} />
         </React.Fragment>
     );

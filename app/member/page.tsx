@@ -4,6 +4,9 @@ import HeaderMid from '@/app/_components/page/header-mid';
 import HeaderRight from '@/app/_components/page/header-right';
 import Main from '@/app/_components/page/main';
 import { getMember, insertMember, updateMember, deleteMember } from '@/app/_actions/member';
+import ToasterContainer from '../_components/toaster-container';
+import toast from 'react-hot-toast';
+import { object } from 'zod';
 
 // Define staticSiteRendering function
 async function Member () {
@@ -53,6 +56,7 @@ async function Member () {
         <main className='main'>
             <Main headerTitle="Manage Member" formTitle="Member" fetchedData={fetchedData} inputDictInsert={inputDictInsert} inputDictUpdate={inputDictUpdate} primaryKey={primaryKey} columnListDisplay={columnListDisplay} insertAction={insertAction} updateAction={updateAction} deleteAction={deleteAction} selectOptionData={selectOptionData} selectPrimaryKey={selectPrimaryKey} selectPrimaryKeyList={selectPrimaryKeyList} />
         </main>
+        <ToasterContainer />
       </React.Fragment>
     );
   };

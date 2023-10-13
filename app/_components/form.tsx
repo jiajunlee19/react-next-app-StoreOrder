@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRef } from 'react';
 import SubmitButton from '@/app/_components/button-submit';
+import { toast } from 'react-hot-toast';
 
 type TInputDict = {
     [key: string]: string,
@@ -19,7 +20,7 @@ type FormProps = {
     onDynamicChange: React.ChangeEventHandler, 
     onSubmitClick: React.MouseEventHandler, 
     onCancelClick: React.MouseEventHandler, 
-    formSubmitAction: (prevState: any, formData: FormData) => Promise<{messages: string}>, 
+    formSubmitAction: (formData: FormData) => Promise<{success?: string, error?: string}>, 
     selectOptionData: TRowData[],
 };
 
@@ -121,8 +122,14 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
 
     return (
         <div className={formClassName}>
-            <form ref={formRef} className="form-container" action={ async (formData: FormData): Promise<void> => {
-                    await formSubmitAction({messages: ''} ,formData);
+            <form ref={formRef} className="form-container" action={ async (formData) => {
+                    const result = await formSubmitAction(formData);
+                    if (result?.error) {
+                        toast.error(result.error);
+                    }
+                    else if (result?.success) {
+                        toast.success(result.success);
+                    }
                     formRef.current?.reset();
                 }
             }>

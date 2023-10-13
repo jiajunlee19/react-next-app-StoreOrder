@@ -17,8 +17,8 @@ type ShowFormProps = {
     }, 
     onSetIsShowForm: React.Dispatch<React.SetStateAction<string | null>>,
     onSetRowData: React.Dispatch<React.SetStateAction<{[key: string]: any}>>, 
-    insertUrl: (prevState: any, formData: FormData) => Promise<{messages: string}>, 
-    updateUrl: (prevState: any, formData: FormData) => Promise<{messages: string}>, 
+    insertAction: (formData: FormData) => Promise<{success?: string, error?: string}>, 
+    updateAction: (formData: FormData) => Promise<{success?: string, error?: string}>, 
     selectOptionData: {
         [key: string]: any,
     }[], 
@@ -27,7 +27,7 @@ type ShowFormProps = {
 };
 
 function ShowForm( {isShowForm, formTitle, rowData, inputDictInsert, inputDictUpdate, onSetIsShowForm, onSetRowData, 
-                    insertUrl, updateUrl, selectOptionData, selectPrimaryKey, selectPrimaryKeyList}
+                    insertAction, updateAction, selectOptionData, selectPrimaryKey, selectPrimaryKeyList}
                     : ShowFormProps ): React.JSX.Element {
 
     // creating nested object based on primaryKey hierachy list
@@ -93,8 +93,8 @@ function ShowForm( {isShowForm, formTitle, rowData, inputDictInsert, inputDictUp
     return (
         <React.Fragment>
             <ButtonClick buttonTitle={"Insert New Item"} onButtonClick={() => handleShowFormClick('insert')}/>
-            <Form formClassName={isShowForm === 'insert' ? 'form-popout': 'form-popout-hidden'} formTitle={"Insert " + formTitle} inputDict={inputDictInsert} rowData={rowData} onInputChange={handleInputChange} onDynamicChange={handleDynamicChange(selectPrimaryKey)} onCancelClick={handleCancelClick} onSubmitClick={handleSubmitClick('insert')} formSubmitAction={insertUrl} selectOptionData={selectOptionData} />
-            <Form formClassName={isShowForm === 'update' ? 'form-popout': 'form-popout-hidden'} formTitle={"Update " + formTitle} inputDict={inputDictUpdate} rowData={rowData} onInputChange={handleInputChange} onDynamicChange={handleDynamicChange(selectPrimaryKey)} onCancelClick={handleCancelClick} onSubmitClick={handleSubmitClick('update')} formSubmitAction={updateUrl} selectOptionData={selectOptionData} />
+            <Form formClassName={isShowForm === 'insert' ? 'form-popout': 'form-popout-hidden'} formTitle={"Insert " + formTitle} inputDict={inputDictInsert} rowData={rowData} onInputChange={handleInputChange} onDynamicChange={handleDynamicChange(selectPrimaryKey)} onCancelClick={handleCancelClick} onSubmitClick={handleSubmitClick('insert')} formSubmitAction={insertAction} selectOptionData={selectOptionData} />
+            <Form formClassName={isShowForm === 'update' ? 'form-popout': 'form-popout-hidden'} formTitle={"Update " + formTitle} inputDict={inputDictUpdate} rowData={rowData} onInputChange={handleInputChange} onDynamicChange={handleDynamicChange(selectPrimaryKey)} onCancelClick={handleCancelClick} onSubmitClick={handleSubmitClick('update')} formSubmitAction={updateAction} selectOptionData={selectOptionData} />
         </React.Fragment>
     );
 
