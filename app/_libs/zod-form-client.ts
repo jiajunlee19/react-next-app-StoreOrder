@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+// inputType
+const inputTypeEnums = z.enum(["text", "number", "password", "select", "dynamic", "hidden", "readonly"]);
+export const InputTypeSchema = z.record(z.string(), inputTypeEnums);
+
+
 // Member
 export const SelectMemberSchema = z.object({
     member_id: z.string().min(1).uuid(),

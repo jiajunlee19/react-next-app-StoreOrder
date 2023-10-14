@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { InputTypeSchema } from "@/app/_libs/zod-form-client";
 import { 
     SelectMemberSchema, InsertMemberSchema, UpdateMemberSchema, DeleteMemberSchema,
     SelectMemberLevelSchema, InsertMemberLevelSchema, UpdateMemberLevelSchema, DeleteMemberLevelSchema,
@@ -7,6 +8,8 @@ import {
     SelectOrderSchema, InsertOrderSchema, UpdateOrderSchema, DeleteOrderSchema,
     SelectOrderItemSchema, InsertOrderItemSchema, UpdateOrderItemSchema, DeleteOrderItemSchema
 } from "@/app/_libs/zod-form-server";
+
+export type TInputType = z.infer<typeof InputTypeSchema>;
 
 export type TSelectMember = z.infer<typeof SelectMemberSchema>;
 export type TInsertMember = z.infer<typeof InsertMemberSchema>;
