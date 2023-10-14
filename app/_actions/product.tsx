@@ -3,8 +3,9 @@
 import { v5 as uuidv5 } from 'uuid';
 import { revalidatePath } from 'next/cache';
 import prisma from '@/prisma/prisma';
-import { parsedEnv } from '../_libs/zod-env';
-import { SelectProductSchema, InsertProductSchema, UpdateProductSchema, DeleteProductSchema } from '../_libs/zod-form-server';
+import { parsedEnv } from '@/app/_libs/zod-env';
+import { SelectProductSchema, InsertProductSchema, UpdateProductSchema, DeleteProductSchema } from '@/app/_libs/zod-form-server';
+import { TSelectProduct } from '@/app/_libs/types';
 
 const UUID5_NAMESPACE = parsedEnv.UUID5_NAMESPACE;
 const UUID5_SECRET = uuidv5(UUID5_NAMESPACE, uuidv5.DNS)
@@ -33,12 +34,12 @@ export async function getUOM() {
 
 };
 
-export async function getProduct() {
+export async function getProduct(): Promise<TSelectProduct[]> {
 
     try {
 
         // get result from prisma
-        const result = await prisma.$queryRaw`SELECT p.*,u.uom_name FROM product p inner join uom u on p.uom_id = u.uom_id`;
+        const result: TSelectProduct[] = await prisma.$queryRaw`SELECT p.*,u.uom_name FROM product p inner join uom u on p.uom_id = u.uom_id`;
         // const result = await prisma.product.findMany({
         //     include: {
         //         fk_uom_id: {
@@ -49,18 +50,10 @@ export async function getProduct() {
         //     }
         // });
 
-        const parsedForm = SelectProductSchema.safeParse({
-            result
-        });
-
-        if (!parsedForm.success) {
-            return []
-        };
-
         // Invalidate existing cache, forcing static site re-rendering
         revalidatePath('/product');
 
-        return parsedForm.data
+        return result
 
     } catch(e) {
         return []
