@@ -4,7 +4,7 @@ import Table from '@/app/_components/table';
 import FormDelete from '@/app/_components/form-delete';
 
 type TRowData = {
-    [key: string]: any,
+    [key: string]: string | number | Date,
 }
 
 type ShowTableProps = {
@@ -72,16 +72,16 @@ function ShowTable( {fetchedData, primaryKey, columnListDisplay,
     const tableBody = filteredData.map((row, i) => {
         
         const tableData = Object.keys(row).map(column => {
-            return  <td key={column}>{row[column]}</td>;
+            return  <td key={column}>{row[column].toString()}</td>;
         });
         
         return (
             //use each table row UID as key value 
-            <tr key={fetchedData[i][primaryKey]}>
+            <tr key={fetchedData[i][primaryKey].toString()}>
                 {tableData}
                 <td>
                     <button onClick={handleUpdateClick(fetchedData[i])}>update</button><br/>
-                    <FormDelete formSubmitAction={deleteAction} primaryKey={primaryKey} primaryID={fetchedData[i][primaryKey]} onDeleteClick={handleDeleteClick} />
+                    <FormDelete formSubmitAction={deleteAction} primaryKey={primaryKey} primaryID={fetchedData[i][primaryKey].toString()} onDeleteClick={handleDeleteClick} />
                 </td>
             </tr>
         );
