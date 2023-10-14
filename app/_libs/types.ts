@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { InputTypeSchema } from "@/app/_libs/zod-form-client";
 import { 
     SelectMemberSchema, InsertMemberSchema, UpdateMemberSchema, DeleteMemberSchema,
     SelectMemberLevelSchema, InsertMemberLevelSchema, UpdateMemberLevelSchema, DeleteMemberLevelSchema,
@@ -9,7 +8,15 @@ import {
     SelectOrderItemSchema, InsertOrderItemSchema, UpdateOrderItemSchema, DeleteOrderItemSchema
 } from "@/app/_libs/zod-form-server";
 
-export type TInputType = z.infer<typeof InputTypeSchema>;
+export type TFormMode = "insert" | "update" | null;
+
+export type TRowData = {
+    [key: string]: string | number | Date,
+};
+
+export type TInputType = {
+    [key: string]: "number" | "select" | "text" | "password" | "dynamic" | "hidden" | "readonly"
+}
 
 export type TSelectMember = z.infer<typeof SelectMemberSchema>;
 export type TInsertMember = z.infer<typeof InsertMemberSchema>;
