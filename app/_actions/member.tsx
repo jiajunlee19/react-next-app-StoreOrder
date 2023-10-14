@@ -3,7 +3,7 @@
 import { v5 as uuidv5 } from 'uuid';
 import { revalidatePath } from 'next/cache';
 import prisma from '@/prisma/prisma';
-import { parsedEnv } from '../_libs/zod-env';
+import { parsedEnv } from '@/app/_libs/zod-env';
 import { SelectMemberSchema, InsertMemberSchema, UpdateMemberSchema, DeleteMemberSchema } from '@/app/_libs/zod-form-server';
 
 const UUID5_NAMESPACE = parsedEnv.UUID5_NAMESPACE;

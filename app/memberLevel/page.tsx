@@ -4,7 +4,7 @@ import HeaderMid from '@/app/_components/page/header-mid';
 import HeaderRight from '@/app/_components/page/header-right';
 import Main from '@/app/_components/page/main';
 import { getMemberLevel, insertMemberLevel, updateMemberLevel, deleteMemberLevel } from '@/app/_actions/memberLevel';
-import ToasterContainer from '../_components/toaster-container';
+import ToasterContainer from '@/app/_components/toaster-container';
 
 // Define staticSiteRendering function
 async function MemberLevel () {
