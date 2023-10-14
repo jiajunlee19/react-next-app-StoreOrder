@@ -30,8 +30,7 @@ async function Order () {
     const primaryKey: (keyof TSelectOrder) = 'order_id';
 
     // declare column list to be displayed, this must be a subset of fetched data columns
-    const columnListDisplay: (keyof TSelectOrder)[] = ['order_id', 'member_name',]
-    // 'order_created_date', 'order_updated_date'
+    const columnListDisplay: (keyof TSelectOrder)[] = ['order_id', 'member_name', 'order_created_date', 'order_updated_date']
 
     // declare insert/update/delete async function
     const insertAction = insertOrder;
