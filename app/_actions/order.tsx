@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 import prisma from '@/prisma/prisma';
 import { parsedEnv } from '@/app/_libs/zod-env';
 import { SelectOrderSchema, InsertOrderSchema, UpdateOrderSchema, DeleteOrderSchema } from '@/app/_libs/zod-form-server';
-import { TSelectOrder } from '@/app/_libs/types';
+import { type TSelectOrder } from '@/app/_libs/types';
 
 const UUID5_NAMESPACE = parsedEnv.UUID5_NAMESPACE;
 const UUID5_SECRET = uuidv5(UUID5_NAMESPACE, uuidv5.DNS)
