@@ -21,7 +21,7 @@ function FormDelete( { formSubmitAction, primaryKey, primaryID, onDeleteClick}: 
                 }
             }
         }>
-            <input type="hidden" name={primaryKey} value={primaryID} required readOnly/>
+            <input type="hidden" name={primaryKey} value={primaryID} required readOnly formNoValidate/>
             <SubmitButton buttonClass="button" buttonTitle="delete" onButtonClick={onDeleteClick} submitingButtonTitle="deleting" />
         </form>
     );

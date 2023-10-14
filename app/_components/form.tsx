@@ -61,7 +61,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
             if (inputDict[key] === 'hidden') {
                 return (
                     <React.Fragment key={key}>
-                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData?.[key]} onChange={onInputChange} required readOnly hidden />
+                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData?.[key]} onChange={onInputChange} required readOnly hidden formNoValidate />
                     </React.Fragment>
                 );
             }
@@ -70,7 +70,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
                 return (
                     <React.Fragment key={key}>
                         <label className="label" htmlFor={key}>{key}: </label>
-                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData?.[key]} onChange={onInputChange} required readOnly />
+                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData?.[key]} onChange={onInputChange} required readOnly formNoValidate />
                     </React.Fragment>
                 );
             }
@@ -91,7 +91,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
                 return (
                     <React.Fragment key={key}>
                         <label className="label" htmlFor={key}>{key}: </label>
-                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData?.[key]} onChange={onInputChange} required readOnly />
+                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData?.[key]} onChange={onInputChange} required readOnly formNoValidate />
                     </React.Fragment>
                 );
             }
@@ -100,7 +100,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
                 return (
                     <React.Fragment key={key}>
                         <label className="label" htmlFor={key}>{key}: </label>
-                        <input name={key} className="input" type="number" step="any" onChange={onInputChange} required />
+                        <input name={key} className="input" type="number" step="any" onChange={onInputChange} required formNoValidate />
                     </React.Fragment>
                 );
             }
@@ -109,7 +109,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
                 return (
                     <React.Fragment key={key}>
                         <label className="label" htmlFor={key}>{key}: </label>
-                        <input name={key} className="input" type={inputDict[key]} onChange={onInputChange} required />
+                        <input name={key} className="input" type={inputDict[key]} onChange={onInputChange} required formNoValidate />
                     </React.Fragment>
                 );
             }
