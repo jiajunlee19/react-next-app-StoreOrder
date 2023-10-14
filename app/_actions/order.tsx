@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import prisma from '@/prisma/prisma';
 import { parsedEnv } from '@/app/_libs/zod-env';
 import { SelectOrderSchema, InsertOrderSchema, UpdateOrderSchema, DeleteOrderSchema } from '@/app/_libs/zod-form-server';
+import { TSelectOrder } from '@/app/_libs/types';
 
 const UUID5_NAMESPACE = parsedEnv.UUID5_NAMESPACE;
 const UUID5_SECRET = uuidv5(UUID5_NAMESPACE, uuidv5.DNS)
@@ -33,29 +34,21 @@ export async function getMember() {
 
 };
 
-export async function getOrder() {
+export async function getOrder(): Promise<TSelectOrder[]> {
 
     try {
 
         // get result from prisma
-        const result = await prisma.$queryRaw`
+        const result: TSelectOrder[] = await prisma.$queryRaw`
             SELECT o.*, m.member_name 
             FROM "order" o 
             inner join member m on o.member_id = m.member_id
         `;
-        
-        const parsedForm = SelectOrderSchema.safeParse({
-            result
-        });
-
-        if (!parsedForm.success) {
-            return []
-        }
 
         // Invalidate existing cache, forcing static site re-rendering
         revalidatePath('/');
 
-        return parsedForm.data
+        return result
 
     } catch(e) {
         return []
