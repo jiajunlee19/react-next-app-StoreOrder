@@ -5,6 +5,7 @@ import HeaderRight from '@/app/_components/page/header-right';
 import Main from '@/app/_components/page/main';
 import { getUOM, insertUOM, updateUOM, deleteUOM } from '@/app/_actions/uom';
 import ToasterContainer from '@/app/_components/toaster-container';
+import { type TInputType, type TSelectUom } from '@/app/_libs//types';
 
 // Define staticSiteRendering function
 async function UOM () {
@@ -13,21 +14,21 @@ async function UOM () {
     const fetchedData = await getUOM();
 
     // declare all input types for inputDictInsert
-    const inputDictInsert = {
+    const inputDictInsert: TInputType = {
         'uom_name': 'text'
     };
 
     // declare all input types for inputDictUpdate
-    const inputDictUpdate = {
+    const inputDictUpdate: TInputType = {
         'uom_id': 'hidden',
         'uom_name': 'readonly'
     };    
 
     // declare primary key
-    const primaryKey = 'uom_id';
+    const primaryKey: (keyof TSelectUom) = 'uom_id';
 
     // declare column list to be displayed, this must be a subset of fetched data columns
-    const columnListDisplay = ['uom_name']
+    const columnListDisplay: (keyof TSelectUom)[] = ['uom_name']
 
     // declare insert/update/delete async function
     const insertAction = insertUOM;
@@ -36,8 +37,8 @@ async function UOM () {
 
 
     // fetch data for select options
-    const selectOptionData: any = [];
-    const selectPrimaryKey = '';
+    const selectOptionData: {[key: string]: any}[] = [];
+    const selectPrimaryKey: string = '';
     const selectPrimaryKeyList: string[] = [];
 
     return (

@@ -5,6 +5,7 @@ import HeaderRight from '@/app/_components/page/header-right';
 import Main from '@/app/_components/page/main';
 import { getMember, insertMember, updateMember, deleteMember } from '@/app/_actions/member';
 import ToasterContainer from '@/app/_components/toaster-container';
+import { type TInputType, type TSelectMember } from '@/app/_libs//types';
 
 // Define staticSiteRendering function
 async function Member () {
@@ -13,14 +14,14 @@ async function Member () {
     const fetchedData = await getMember();
 
     // declare all input types for inputDictInsert
-    const inputDictInsert = {
+    const inputDictInsert: TInputType = {
         'member_name': 'text',
         'member_password': 'password',
         'member_bonus_points': 'number'
     };
 
     // declare all input types for inputDictUpdate
-    const inputDictUpdate = {
+    const inputDictUpdate: TInputType = {
         'member_id': 'hidden',
         'member_name': 'readonly',
         'member_password': 'password',
@@ -28,10 +29,10 @@ async function Member () {
     };    
 
     // declare primary key
-    const primaryKey = 'member_id';
+    const primaryKey: (keyof TSelectMember) = 'member_id';
 
     // declare column list to be displayed, this must be a subset of fetched data columns
-    const columnListDisplay = ['member_name', 'member_bonus_points']
+    const columnListDisplay: (keyof TSelectMember)[] = ['member_name', 'member_bonus_points']
 
     // declare insert/update/delete async function
     const insertAction = insertMember;

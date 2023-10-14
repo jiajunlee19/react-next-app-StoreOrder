@@ -5,6 +5,7 @@ import HeaderRight from '@/app/_components/page/header-right';
 import Main from '@/app/_components/page/main';
 import { getUOM, getProduct, insertProduct, updateProduct, deleteProduct } from '@/app/_actions/product';
 import ToasterContainer from '@/app/_components/toaster-container';
+import { type TInputType, type TSelectProduct } from '@/app/_libs//types';
 
 // Define staticSiteRendering function
 async function Product () {
@@ -13,7 +14,7 @@ async function Product () {
     const fetchedData = await getProduct();
 
     // declare all input types for inputDictInsert
-    const inputDictInsert = {
+    const inputDictInsert: TInputType = {
         'product_name': 'text',
         'uom_id': 'dynamic',
         'uom_name': 'select',
@@ -22,7 +23,7 @@ async function Product () {
     };
 
     // declare all input types for inputDictUpdate
-    const inputDictUpdate = {
+    const inputDictUpdate: TInputType = {
         'product_id': 'hidden',
         'product_name': 'readonly',
         'uom_name': 'readonly',
@@ -31,10 +32,10 @@ async function Product () {
     };    
 
     // declare primary key
-    const primaryKey = 'product_id';
+    const primaryKey: (keyof TSelectProduct) = 'product_id';
 
     // declare column list to be displayed, this must be a subset of fetched data columns
-    const columnListDisplay = ['product_name', 'uom_name', 'product_unit_price', 'product_bonus_points']
+    const columnListDisplay: (keyof TSelectProduct)[] = ['product_name', 'uom_name', 'product_unit_price', 'product_bonus_points']
 
     // declare insert/update/delete async function
     const insertAction = insertProduct;
@@ -44,8 +45,8 @@ async function Product () {
 
     // fetch data for select options
     const selectOptionData = await getUOM();
-    const selectPrimaryKey = 'uom_id';
-    const selectPrimaryKeyList: string[] = ['uom_name'];
+    const selectPrimaryKey: (keyof typeof selectOptionData[0]) = 'uom_id';
+    const selectPrimaryKeyList: (keyof typeof selectOptionData[0])[] = ['uom_name'];
 
     return (
       <React.Fragment>

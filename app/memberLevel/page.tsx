@@ -5,6 +5,7 @@ import HeaderRight from '@/app/_components/page/header-right';
 import Main from '@/app/_components/page/main';
 import { getMemberLevel, insertMemberLevel, updateMemberLevel, deleteMemberLevel } from '@/app/_actions/memberLevel';
 import ToasterContainer from '@/app/_components/toaster-container';
+import { type TInputType, type TSelectMemberLevel } from '@/app/_libs//types';
 
 // Define staticSiteRendering function
 async function MemberLevel () {
@@ -13,14 +14,14 @@ async function MemberLevel () {
     const fetchedData = await getMemberLevel();
 
     // declare all input types for inputDictInsert
-    const inputDictInsert = {
+    const inputDictInsert: TInputType = {
         'member_level_name': 'text',
         'bonus_points_min': 'number',
         'bonus_points_max': 'number'
     };
 
     // declare all input types for inputDictUpdate
-    const inputDictUpdate = {
+    const inputDictUpdate: TInputType = {
         'member_level_id': 'hidden',
         'member_level_name': 'readonly',
         'bonus_points_min': 'number',
@@ -28,10 +29,10 @@ async function MemberLevel () {
     };    
 
     // declare primary key
-    const primaryKey = 'member_level_id';
+    const primaryKey: (keyof TSelectMemberLevel) = 'member_level_id';
 
     // declare column list to be displayed, this must be a subset of fetched data columns
-    const columnListDisplay = ['member_level_name', 'bonus_points_min', 'bonus_points_max']
+    const columnListDisplay: (keyof TSelectMemberLevel)[] = ['member_level_name', 'bonus_points_min', 'bonus_points_max']
 
     // declare insert/update/delete async function
     const insertAction = insertMemberLevel;
@@ -40,8 +41,8 @@ async function MemberLevel () {
 
 
     // fetch data for select options
-    const selectOptionData: any = [];
-    const selectPrimaryKey = '';
+    const selectOptionData: {[key: string]: any}[] = [];
+    const selectPrimaryKey: string = '';
     const selectPrimaryKeyList: string[] = [];
 
     return (
