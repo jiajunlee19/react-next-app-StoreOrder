@@ -6,7 +6,7 @@ import {
     SelectProductSchema, InsertProductSchema, UpdateProductSchema, DeleteProductSchema,
     SelectOrderSchema, InsertOrderSchema, UpdateOrderSchema, DeleteOrderSchema,
     SelectOrderItemSchema, InsertOrderItemSchema, UpdateOrderItemSchema, DeleteOrderItemSchema
-} from "./zod-form-server";
+} from "@/app/_libs/zod-form-server";
 
 export type TSelectMember = z.infer<typeof SelectMemberSchema>;
 export type TInsertMember = z.infer<typeof InsertMemberSchema>;
