@@ -1,6 +1,6 @@
-generator zod {
-  provider       = "zod-prisma-types"
-}
+// generator zod {
+//   provider       = "zod-prisma-types"
+// }
 
 generator client {
   provider = "prisma-client-js"
