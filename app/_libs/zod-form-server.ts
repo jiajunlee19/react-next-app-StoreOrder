@@ -162,6 +162,7 @@ export const SelectOrderItemSchema = z.object({
     uom_id: z.string().min(1).uuid().optional(),
     uom_name: z.string().min(1).optional(),
     order_item_quantity: z.coerce.number().positive().optional(),
+    order_item_subtotal: z.coerce.number().positive().optional(),
     order_item_created_date: z.coerce.date().optional(),
     order_item_updated_date: z.coerce.date().optional(),
 });
