@@ -5,13 +5,14 @@ import {useState} from 'react';
 import H2 from '@/app/_components/h2';
 import ShowForm from '@/app/_components/page/show-form';
 import ShowTable from '@/app/_components/page/show-table';
+import { type TFormMode, type TRowData, type TInputType } from '@/app/_libs//types';
 
 type MainProps = {
   headerTitle: string, 
   formTitle: string, 
-  fetchedData: {[key: string]: any}[], 
-  inputDictInsert: {[key: string]: string}, 
-  inputDictUpdate: {[key: string]: string}, 
+  fetchedData: TRowData[], 
+  inputDictInsert: TInputType, 
+  inputDictUpdate: TInputType, 
   primaryKey: string, 
   columnListDisplay: string[], 
   insertAction: (formData: FormData) => Promise<{success?: string, error?: string}>, 
@@ -27,7 +28,7 @@ function Main( {headerTitle, formTitle, fetchedData, inputDictInsert, inputDictU
                 insertAction, updateAction, deleteAction, selectOptionData, selectPrimaryKey, selectPrimaryKeyList}: MainProps ) {
                 
     // A state that controls whether a form should show, acceptable values: null/insert/update
-    const [isShowForm, setIsShowForm] = useState<string | null>(null);
+    const [isShowForm, setIsShowForm] = useState<TFormMode>(null);
 
     // Init rowData column keys accordingly for insert/update
     let initRowData = fetchedData[0];

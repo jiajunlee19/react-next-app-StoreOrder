@@ -1,17 +1,13 @@
 import React from 'react';
-import Loader from '@/app/_components/loader';
 import Table from '@/app/_components/table';
 import FormDelete from '@/app/_components/form-delete';
-
-type TRowData = {
-    [key: string]: string | number | Date,
-}
+import { type TFormMode, type TRowData } from '@/app/_libs//types';
 
 type ShowTableProps = {
     fetchedData: TRowData[], 
     primaryKey: string, 
     columnListDisplay: string[], 
-    onSetIsShowForm: React.Dispatch<React.SetStateAction<string | null>>, 
+    onSetIsShowForm: React.Dispatch<React.SetStateAction<TFormMode>>, 
     onSetRowData: React.Dispatch<React.SetStateAction<TRowData>>, 
     deleteAction: (formData: FormData) => Promise<{success?: string, error?: string}>,
 };

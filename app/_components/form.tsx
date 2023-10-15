@@ -2,19 +2,12 @@ import React from 'react';
 import { useRef } from 'react';
 import SubmitButton from '@/app/_components/button-submit';
 import { toast } from 'react-hot-toast';
-
-type TInputDict = {
-    [key: string]: string,
-};
-
-type TRowData = {
-    [key: string]: any,
-};
+import { type TRowData, type TInputType } from '@/app/_libs//types';
 
 type FormProps = {
     formClassName: string, 
     formTitle: string, 
-    inputDict: TInputDict,
+    inputDict: TInputType,
     rowData: TRowData,
     onInputChange: React.ChangeEventHandler, 
     onDynamicChange: React.ChangeEventHandler, 
@@ -37,7 +30,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
         const selectOption = selectOptionData.map((row) => {
 
             return (
-                <option key={row[key]} value={row[key]}>{row[key]}</option>
+                <option key={row[key].toString()} value={row[key].toString()}>{row[key].toString()}</option>
             );
         });
 
@@ -45,7 +38,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
     };
 
     // Generate form inputs
-    function generateFormInput(inputDict: TInputDict, rowData: TRowData, selectOptionData: TRowData[]) {
+    function generateFormInput(inputDict: TInputType, rowData: TRowData, selectOptionData: TRowData[]) {
 
         // Development: Write handling method for these special input value types
         // const inputDict = {
@@ -61,7 +54,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
             if (inputDict[key] === 'hidden') {
                 return (
                     <React.Fragment key={key}>
-                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData?.[key]} onChange={onInputChange} required readOnly hidden formNoValidate />
+                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData?.[key].toString()} onChange={onInputChange} required readOnly hidden formNoValidate />
                     </React.Fragment>
                 );
             }
@@ -70,7 +63,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
                 return (
                     <React.Fragment key={key}>
                         <label className="label" htmlFor={key}>{key}: </label>
-                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData?.[key]} onChange={onInputChange} required readOnly formNoValidate />
+                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData?.[key].toString()} onChange={onInputChange} required readOnly formNoValidate />
                     </React.Fragment>
                 );
             }
@@ -91,7 +84,7 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
                 return (
                     <React.Fragment key={key}>
                         <label className="label" htmlFor={key}>{key}: </label>
-                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData?.[key]} onChange={onInputChange} required readOnly formNoValidate />
+                        <input name={key} className="input" type="text" placeholder="placeholder" value={rowData?.[key].toString()} onChange={onInputChange} required readOnly formNoValidate />
                     </React.Fragment>
                 );
             }

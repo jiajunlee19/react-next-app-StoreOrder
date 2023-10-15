@@ -2,26 +2,19 @@ import React from 'react';
 import ButtonClick from '@/app/_components/button-click';
 import Form from '@/app/_components/form';
 import { createNestedObject, accessNestedObject } from '@/app/_actions/utils';
+import { type TFormMode, type TRowData, type TInputType } from '@/app/_libs//types';
 
 type ShowFormProps = {
-    isShowForm: string | null, 
+    isShowForm: TFormMode, 
     formTitle: string, 
-    rowData: {
-        [key: string]: any,
-    }, 
-    inputDictInsert: {
-        [key: string]: string,
-    }, 
-    inputDictUpdate: {
-        [key: string]: string,
-    }, 
-    onSetIsShowForm: React.Dispatch<React.SetStateAction<string | null>>,
+    rowData: TRowData
+    inputDictInsert: TInputType
+    inputDictUpdate: TInputType
+    onSetIsShowForm: React.Dispatch<React.SetStateAction<TFormMode>>,
     onSetRowData: React.Dispatch<React.SetStateAction<{[key: string]: any}>>, 
     insertAction: (formData: FormData) => Promise<{success?: string, error?: string}>, 
     updateAction: (formData: FormData) => Promise<{success?: string, error?: string}>, 
-    selectOptionData: {
-        [key: string]: any,
-    }[], 
+    selectOptionData: TRowData[]
     selectPrimaryKey: string, 
     selectPrimaryKeyList: string[],
 };
@@ -35,13 +28,13 @@ function ShowForm( {isShowForm, formTitle, rowData, inputDictInsert, inputDictUp
     selectOptionData?.forEach(row => {
         let hierachyList: string[] = [];
         selectPrimaryKeyList.forEach(key => {
-            hierachyList.push(row[key])
+            hierachyList.push(row[key].toString())
         });
         createNestedObject(selectOptionDict, hierachyList, row);
     });
 
 
-    const handleShowFormClick = (action: string) => {
+    const handleShowFormClick = (action: TFormMode) => {
         // setIsShowForm(action);
         onSetIsShowForm(action);
     };
