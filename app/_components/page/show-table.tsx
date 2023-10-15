@@ -2,6 +2,7 @@ import React from 'react';
 import Table from '@/app/_components/table';
 import FormDelete from '@/app/_components/form-delete';
 import { type TFormMode, type TRowData } from '@/app/_libs//types';
+import { type } from 'os';
 
 type ShowTableProps = {
     fetchedData: TRowData[], 
@@ -66,9 +67,19 @@ function ShowTable( {fetchedData, primaryKey, columnListDisplay,
 
     //taking fetched data rows as table body
     const tableBody = filteredData.map((row, i) => {
-        
         const tableData = Object.keys(row).map(column => {
-            return  <td key={column}>{row[column].toString()}</td>;
+            if (row[column] instanceof Date) {
+                // if it is a Date object, convert it to dateString
+                const dateStringList = new Date((row[column] as Date).getTime() - ((row[column] as Date).getTimezoneOffset() * 60000 ))
+                                    .toISOString()
+                                    .split("T");
+                const dateString = dateStringList[0];
+                const timeString = dateStringList[1].split(".")[0];
+                return  <td key={column}>{dateString + " " + timeString}</td>;
+            }
+            else {
+                return  <td key={column}>{row[column].toString()}</td>;
+            }
         });
         
         return (
