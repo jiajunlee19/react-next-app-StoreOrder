@@ -6,6 +6,7 @@ import { z } from "zod";
 // In local dev, you may typically just run "dotenv -e ./env/.env npm run dev" instead
 
 const EnvSchema = z.object({
+    
     // POSTGRESS connections
     POSTGRES_URL: z.string().min(1).startsWith('postgres://'),
     POSTGRES_PRISMA_URL: z.string().min(1).startsWith('postgres://'),
@@ -25,6 +26,23 @@ const EnvSchema = z.object({
     UUID5_DELIMITER: z.string().min(1),
 });
 
-export const parsedEnv = EnvSchema.parse(
-    process.env
-);
+export const parsedEnv = EnvSchema.parse({
+
+    // POSTGRESS connections
+    POSTGRES_URL: process.env.POSTGRES_URL,
+    POSTGRES_PRISMA_URL: process.env.POSTGRES_PRISMA_URL,
+    POSTGRES_URL_NON_POOLING: process.env.POSTGRES_URL_NON_POOLING,
+    POSTGRES_USER: process.env.POSTGRES_USER,
+    POSTGRES_HOST: process.env.POSTGRES_HOST,
+    POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
+    POSTGRES_DATABASE: process.env.POSTGRES_DATABASE,
+
+    // GitHub OAuth
+    GITHUB_ID: process.env.GITHUB_ID,
+    GITHUB_SECRET: process.env.GITHUB_SECRET,
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+
+    // UUID namespace secret
+    UUID5_NAMESPACE: process.env.UUID5_NAMESPACE,
+    UUID5_DELIMITER: process.env.UUID5_DELIMITER,
+});
