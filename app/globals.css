@@ -75,6 +75,7 @@ button, .button-insert, .button-update {
   transform: translate(-50%, -50%);
   border: 3px solid #f1f1f1;
   z-index: 1;
+  overflow: scroll;
 }
 
 /* Hide the popout form undernealth and make the size 0% */
@@ -88,6 +89,7 @@ button, .button-insert, .button-update {
   transform: translate(-50%, -50%);
   border: 3px solid #f1f1f1;
   z-index: -1;
+  overflow: scroll;
   opacity: 0;
 }
 
