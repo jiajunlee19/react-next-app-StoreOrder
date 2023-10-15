@@ -5,7 +5,7 @@ import HeaderRight from '@/app/_components/page/header-right';
 import Main from '@/app/_components/page/main';
 import { getUOM, insertUOM, updateUOM, deleteUOM } from '@/app/_actions/uom';
 import ToasterContainer from '@/app/_components/toaster-container';
-import { type TInputType, type TSelectUom } from '@/app/_libs//types';
+import { type TRowData, type TInputType, type TSelectUom } from '@/app/_libs//types';
 
 // Define staticSiteRendering function
 async function UOM () {
@@ -37,7 +37,7 @@ async function UOM () {
 
 
     // fetch data for select options
-    const selectOptionData: {[key: string]: any}[] = [];
+    const selectOptionData: TRowData[] = [];
     const selectPrimaryKey: string = '';
     const selectPrimaryKeyList: string[] = [];
 

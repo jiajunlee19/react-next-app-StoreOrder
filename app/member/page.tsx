@@ -5,7 +5,7 @@ import HeaderRight from '@/app/_components/page/header-right';
 import Main from '@/app/_components/page/main';
 import { getMember, insertMember, updateMember, deleteMember } from '@/app/_actions/member';
 import ToasterContainer from '@/app/_components/toaster-container';
-import { type TInputType, type TSelectMember } from '@/app/_libs//types';
+import { type TRowData, type TInputType, type TSelectMember } from '@/app/_libs//types';
 
 // Define staticSiteRendering function
 async function Member () {
@@ -41,7 +41,7 @@ async function Member () {
 
 
     // fetch data for select options
-    const selectOptionData: {[key: string]: any}[] = [];
+    const selectOptionData: TRowData[] = [];
     const selectPrimaryKey: string = '';
     const selectPrimaryKeyList: string[] = [];
 
