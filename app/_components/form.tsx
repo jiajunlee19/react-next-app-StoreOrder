@@ -129,8 +129,8 @@ function Form( {formClassName, formTitle, inputDict, rowData, onInputChange, onD
                 <h3>{formTitle}</h3>
                 {generateFormInput(inputDict, rowData, selectOptionData)}
                 <SubmitButton buttonClass="button-submit" buttonTitle="submit" onButtonClick={onSubmitClick} submitingButtonTitle="submitting" />
-                <button className="button-cancel" onClick={onCancelClick}>close</button>
-                <button className="button-cancel" onClick={() => formRef.current?.reset()}>reset</button>
+                <button type="button" className="button-cancel" onClick={onCancelClick}>close</button>
+                <button type="button" className="button-cancel" onClick={() => formRef.current?.reset()}>reset</button>
             </form>
         </div>
     );
