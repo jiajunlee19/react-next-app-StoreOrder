@@ -1,27 +1,28 @@
 import { z } from "zod";
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
-// Retrive environment variables
-dotenv.config({ path: '@/env/.env' });
+// dotenv.config({ path: '@/env/.env' });
+// Try not to retrive environment variables locally as env is usually pumped and stored in production servers, 
+// In local dev, you may typically just run "dotenv -e ./env/.env npm run dev" instead
 
 const EnvSchema = z.object({
     // POSTGRESS connections
-    POSTGRES_URL: z.string().nonempty().startsWith('postgres://'),
-    POSTGRES_PRISMA_URL: z.string().nonempty().startsWith('postgres://'),
-    POSTGRES_URL_NON_POOLING: z.string().nonempty().startsWith('postgres://'),
-    POSTGRES_USER: z.string().nonempty(),
-    POSTGRES_HOST: z.string().nonempty(),
-    POSTGRES_PASSWORD: z.string().nonempty(),
-    POSTGRES_DATABASE: z.string().nonempty(),
+    POSTGRES_URL: z.string().min(1).startsWith('postgres://'),
+    POSTGRES_PRISMA_URL: z.string().min(1).startsWith('postgres://'),
+    POSTGRES_URL_NON_POOLING: z.string().min(1).startsWith('postgres://'),
+    POSTGRES_USER: z.string().min(1),
+    POSTGRES_HOST: z.string().min(1),
+    POSTGRES_PASSWORD: z.string().min(1),
+    POSTGRES_DATABASE: z.string().min(1),
 
     // GitHub OAuth
-    GITHUB_ID: z.string().nonempty(),
-    GITHUB_SECRET: z.string().nonempty(),
-    NEXTAUTH_URL: z.string().nonempty().url(),
+    GITHUB_ID: z.string().min(1),
+    GITHUB_SECRET: z.string().min(1),
+    NEXTAUTH_URL: z.string().min(1).url(),
 
     // UUID namespace secret
-    UUID5_NAMESPACE: z.string().nonempty(),
-    UUID5_DELIMITER: z.string().nonempty(),
+    UUID5_NAMESPACE: z.string().min(1),
+    UUID5_DELIMITER: z.string().min(1),
 });
 
 export const parsedEnv = EnvSchema.parse(
